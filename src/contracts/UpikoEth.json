@@ -1,0 +1,103 @@
+{
+  "contractName": "UpikoEth",
+  "abi": [],
+  "bytecode": "0x6080604052348015600f57600080fd5b50603580601d6000396000f3fe6080604052600080fdfea165627a7a723058201c6a84b2dba62a31229581941930cf1c118a17e63a306fc59a16011c9986c05c0029",
+  "deployedBytecode": "0x6080604052600080fdfea165627a7a723058201c6a84b2dba62a31229581941930cf1c118a17e63a306fc59a16011c9986c05c0029",
+  "sourceMap": "27:24:1:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;27:24:1;;;;;;;",
+  "deployedSourceMap": "27:24:1:-;;;;;",
+  "source": "pragma solidity ^0.5.0;\r\n\r\ncontract UpikoEth {\r\n\r\n}",
+  "sourcePath": "C:/lib/2DEV/upiko-eth/contracts/UpikoEth.sol",
+  "ast": {
+    "absolutePath": "/C/lib/2DEV/upiko-eth/contracts/UpikoEth.sol",
+    "exportedSymbols": {
+      "UpikoEth": [
+        59
+      ]
+    },
+    "id": 60,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 58,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:1"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 59,
+        "linearizedBaseContracts": [
+          59
+        ],
+        "name": "UpikoEth",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 60,
+        "src": "27:24:1"
+      }
+    ],
+    "src": "0:51:1"
+  },
+  "legacyAST": {
+    "absolutePath": "/C/lib/2DEV/upiko-eth/contracts/UpikoEth.sol",
+    "exportedSymbols": {
+      "UpikoEth": [
+        59
+      ]
+    },
+    "id": 60,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 58,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:1"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 59,
+        "linearizedBaseContracts": [
+          59
+        ],
+        "name": "UpikoEth",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 60,
+        "src": "27:24:1"
+      }
+    ],
+    "src": "0:51:1"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.0+commit.1d4f565a.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.0.5",
+  "updatedAt": "2019-04-29T14:47:34.051Z",
+  "devdoc": {
+    "methods": {}
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}
