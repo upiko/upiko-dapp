@@ -53,6 +53,7 @@ export default class LoomClient {
     this.currentNetwork = this.contractJson.networks[networkId];
 
     if (!this.currentNetwork) {
+      console.error("not a valid network: , network id was:", this.currentNetwork, networkId);
       throw Error("Contract not deployed on DAppChain");
     }
 
