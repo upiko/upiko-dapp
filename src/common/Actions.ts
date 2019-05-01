@@ -25,8 +25,7 @@ export const fetchProviders = async (
   console.log("web3State, from action", web3State);
 
   let providers: Array<IProvider> = [];
-  //let instance = await contractInstanceFromState(sChainState);
-
+  
   const { sChainClient } = sChainState;
   let instance = await contractInstanceFromState(sChainState);
 
