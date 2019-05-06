@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from './node_modules/react'
 import {withAccount, withWeb3} from '../../chainstate/Web3Wrap';
 
 

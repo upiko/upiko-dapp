@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState} from './node_modules/react'
 //import Web3 from 'web3';
 import Web3Wrapper, {Web3Consumer} from '../../chainstate/Web3Wrap';
 

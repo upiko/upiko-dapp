@@ -1,0 +1,104 @@
+{
+  "contractName": "IlliEth",
+  "abi": [],
+  "metadata": "{\"compiler\":{\"version\":\"0.5.0+commit.1d4f565a\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/C/lib/2DEV/illi-eth/contracts/IlliEth.sol\":\"IlliEth\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/C/lib/2DEV/illi-eth/contracts/IlliEth.sol\":{\"keccak256\":\"0x2dfdc0e156c84de7401a73c3659cfd35e64b906b79b76e217ec1329005c35e41\",\"urls\":[\"bzzr://88c86694031f408ae92ad1f64f29d50f1dd38825435b14dcea8823aff3c732c0\"]}},\"version\":1}",
+  "bytecode": "0x6080604052348015600f57600080fd5b50603580601d6000396000f3fe6080604052600080fdfea165627a7a72305820fc3dee3434aba2ce90765270a756df501b010e6e13fed6ed26e65d70aba2977d0029",
+  "deployedBytecode": "0x6080604052600080fdfea165627a7a72305820fc3dee3434aba2ce90765270a756df501b010e6e13fed6ed26e65d70aba2977d0029",
+  "sourceMap": "27:23:0:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;27:23:0;;;;;;;",
+  "deployedSourceMap": "27:23:0:-;;;;;",
+  "source": "pragma solidity ^0.5.0;\r\n\r\ncontract IlliEth {\r\n\r\n}",
+  "sourcePath": "C:/lib/2DEV/illi-eth/contracts/IlliEth.sol",
+  "ast": {
+    "absolutePath": "/C/lib/2DEV/illi-eth/contracts/IlliEth.sol",
+    "exportedSymbols": {
+      "IlliEth": [
+        2
+      ]
+    },
+    "id": 3,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:0"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 2,
+        "linearizedBaseContracts": [
+          2
+        ],
+        "name": "IlliEth",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 3,
+        "src": "27:23:0"
+      }
+    ],
+    "src": "0:50:0"
+  },
+  "legacyAST": {
+    "absolutePath": "/C/lib/2DEV/illi-eth/contracts/IlliEth.sol",
+    "exportedSymbols": {
+      "IlliEth": [
+        2
+      ]
+    },
+    "id": 3,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:0"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 2,
+        "linearizedBaseContracts": [
+          2
+        ],
+        "name": "IlliEth",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 3,
+        "src": "27:23:0"
+      }
+    ],
+    "src": "0:50:0"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.0+commit.1d4f565a.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.0.6",
+  "updatedAt": "2019-04-11T20:09:13.220Z",
+  "devdoc": {
+    "methods": {}
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}

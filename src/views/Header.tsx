@@ -11,6 +11,7 @@ export default function Header() {
             <div>
                 <Link to="/">Home</Link>
                 <Link to="/register">Register</Link>
+                <Link to="/createsos">CreateSos</Link>
                 <Link to="/test">--=-*!--*-</Link>
             </div>
         </header>

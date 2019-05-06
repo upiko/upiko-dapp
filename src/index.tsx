@@ -7,6 +7,7 @@ import { Router, RouteComponentProps } from "@reach/router";
 import Main from "./views/Main";
 import Register from "./views/Register";
 import Test from './views/Test';
+import CreateSoS from './views/CreateSoS';
 import './bootstrap.min.css';
 import "antd/dist/antd.css";
 
@@ -21,6 +22,7 @@ ReactDOM.render(
         <RouterPage pageComponent={<Main />} path="/" />
         <RouterPage pageComponent={<Register />} path="/register" />
         <RouterPage pageComponent={<Test />} path="/test" />
+        <RouterPage pageComponent={<CreateSoS />} path="/createsos" />
       </App>
     </Router>
   </StoreProvider>,

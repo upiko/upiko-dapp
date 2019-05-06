@@ -1,8 +1,8 @@
 import React from 'react';
-import MyDisplayComponent from './MyDisplayComponent';
-import ProviderList from '../../ProviderList';
+import MyTestDisplayComponent from './MyTestDisplayComponent';
+import ProviderList from '../../upiko/ProviderList';
 import ChainStateRender from '../../chainstate/ChainStateRender';
-import ReloadProviders from '../../ReloadProviders';
+import ReloadProviders from '../../upiko/ReloadProviders';
  
 
 export default function ChainStateLoadingTest() {
@@ -10,7 +10,7 @@ export default function ChainStateLoadingTest() {
     <React.Fragment>
       <p>Testing Loading Blockchain and Side Chain </p>
       <ChainStateRender>
-          <MyDisplayComponent />
+          <MyTestDisplayComponent />
           <ReloadProviders />
           <ProviderList />
       </ChainStateRender>

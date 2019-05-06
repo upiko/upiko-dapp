@@ -20,43 +20,39 @@ class SideChainWrap extends Component {
   async componentDidMount() {
     const { contractJSON } = this.props;
     const sChainClient = await getSChainClient(contractJSON);
-    this.setState(
-      {
-        sChainClient,
-        sChainContract: contractJSON
-      });
-
+    this.setState({
+      sChainClient,
+      sChainContract: contractJSON
+    });
     //console.log("loading sidechainwrap.CDM(), client, contract:", sChainClient, contractJSON);
   }
 
   render() {
-    const {sChainClient, sChainContract} = this.state;
+    const { sChainClient, sChainContract } = this.state;
     const sideChainState = {
       sChainClient: sChainClient,
       sChainContract: sChainContract
-    }
+    };
 
     const contextValue = {
       sChainState: sideChainState
-    }
+    };
 
-    return(
+    return (
       <SChainContext.Provider value={contextValue}>
         {this.props.children}
       </SChainContext.Provider>
-    ) 
+    );
   }
 }
 
-
-function withSChain(Child){
-  return (props) => (
+function withSChain(Child) {
+  return props => (
     <SChainContext.Consumer>
-      {({sChainState}) => <Child {...props} sChainState={sChainState} />}
+      {({ sChainState }) => <Child {...props} sChainState={sChainState} />}
     </SChainContext.Consumer>
-  )
+  );
 }
-
 
 const SChainWrapConsumer = SChainContext.Consumer;
 export { SChainWrapConsumer, withSChain };

@@ -5,7 +5,7 @@ import Footer from "./Footer";
 
 
 const ProviderList = React.lazy<any>(() =>
-  import("./../components/ProviderList")
+  import("../components/upiko/ProviderList")
 );
 
 export default function Main() {

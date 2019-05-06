@@ -1,13 +1,15 @@
 import React from 'react'
-import ChainStateLoadingTest from '../components/test/loading/ChainStateLoadingTest';
-//import ToastTest from '../components/test/ToastTest';
+import MyTestDisplayComponent from '../components/test/loading/MyTestDisplayComponent';
+import ChainStateRender from '../components/chainstate/ChainStateRender';
 
 
 export default function Test() {
   return (
     <div>
       <p>==--* test  +___=-`</p>
-      <ChainStateLoadingTest />
+      <ChainStateRender>
+        <MyTestDisplayComponent />
+      </ChainStateRender>
     </div>
   )
 }

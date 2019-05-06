@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { Store } from "./../common/Store";
-import { withWeb3Contract } from "./chainstate/Web3StateWrap";
-import { withSChain } from "./chainstate/SideChainWrap";
-import { fetchProviders } from "../common/Actions";
+import { Store } from "../../common/Store";
+import { withWeb3Contract } from "../chainstate/Web3StateWrap";
+import { withSChain } from "../chainstate/SideChainWrap";
+import { fetchProviders } from "../../common/Actions";
 import { List, Typography } from "antd";
-import { IProvider } from "./../common/Interfaces";
+import { IProvider } from "../../common/Interfaces";
 
 function ProviderList(props: any): Array<JSX.Element> | any {
   const { state, dispatch } = React.useContext(Store);

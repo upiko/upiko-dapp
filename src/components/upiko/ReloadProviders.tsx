@@ -1,9 +1,9 @@
 import React from "react";
 import { Button } from "antd";
-import { fetchProviders } from "./../common/Actions";
-import { withWeb3Contract } from "./chainstate/Web3StateWrap";
-import { withSChain } from "./chainstate/SideChainWrap";
-import { Store } from "./../common/Store";
+import { fetchProviders } from "../../common/Actions";
+import { withWeb3Contract } from "../chainstate/Web3StateWrap";
+import { withSChain } from "../chainstate/SideChainWrap";
+import { Store } from "../../common/Store";
 
 
 function ReloadProviders(props: any) {

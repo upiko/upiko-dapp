@@ -1,7 +1,6 @@
 {
   "contractName": "UpikoEth",
   "abi": [],
-  "metadata": "{\"compiler\":{\"version\":\"0.5.0+commit.1d4f565a\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/C/lib/2DEV/upiko-eth/contracts/UpikoEth.sol\":\"UpikoEth\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/C/lib/2DEV/upiko-eth/contracts/UpikoEth.sol\":{\"keccak256\":\"0x6cc8025d3fe0c6975ee8188679750a5f1d75fd3a348b4925df2bb3da4fd6fe72\",\"urls\":[\"bzzr://9b9001f8c56c3d416793d7c0d8b4b456f98ba3cefaa0e9c33fc0ef5854cbd211\"]}},\"version\":1}",
   "bytecode": "0x6080604052348015600f57600080fd5b50603580601d6000396000f3fe6080604052600080fdfea165627a7a723058201c6a84b2dba62a31229581941930cf1c118a17e63a306fc59a16011c9986c05c0029",
   "deployedBytecode": "0x6080604052600080fdfea165627a7a723058201c6a84b2dba62a31229581941930cf1c118a17e63a306fc59a16011c9986c05c0029",
   "sourceMap": "27:24:1:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;27:24:1;;;;;;;",
@@ -93,8 +92,8 @@
     "version": "0.5.0+commit.1d4f565a.Emscripten.clang"
   },
   "networks": {},
-  "schemaVersion": "3.0.6",
-  "updatedAt": "2019-04-30T13:04:15.911Z",
+  "schemaVersion": "3.0.5",
+  "updatedAt": "2019-04-29T14:47:34.051Z",
   "devdoc": {
     "methods": {}
   },
