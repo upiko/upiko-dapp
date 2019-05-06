@@ -29,6 +29,12 @@ export interface IProvider {
   name: string;
 }
 
+export interface IUser {
+  name: string;
+  ethAddr: string;
+  isProvider: boolean;
+}
+
 export interface IProviderState {
   providers: Array<any>;
 }

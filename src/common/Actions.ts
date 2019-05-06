@@ -1,10 +1,12 @@
-import { IProvider, IAction, IWeb3State, ISideChainState } from "./Interfaces";
+import { IProvider, IUser, IWeb3State, ISideChainState } from "./Interfaces";
 import { contractInstanceFromState } from "./../utils/sideChainUtils";
 import _ from "lodash";
 import { toast } from "react-toastify";
 
 export const FETCH_PROVIDERS_DATA = "FETCH_PROVIDERS_DATA";
 export const ADD_PROVIDER = "ADD_PROVIDER";
+export const ADD_USER = "ADD_USER";
+
 
 export const notify = (msg: string, success?: boolean) => {
   !success
@@ -25,26 +27,23 @@ export const fetchProviders = async (
   console.log("web3State, from action", web3State);
 
   let providers: Array<IProvider> = [];
-  
   const { sChainClient } = sChainState;
   let instance = await contractInstanceFromState(sChainState);
-
   let allAddresses = await instance.methods.getAllEthAddresses().call();
 
   console.log("allAddresses", allAddresses);
-
   for (let i in allAddresses) {
     let name = await instance.methods.getProviderName(allAddresses[i]).call();
     providers.push({ name: name });
   }
 
   console.log("allAddresses::", allAddresses);
-
   return dispatch({
     type: FETCH_PROVIDERS_DATA,
     payload: providers
   });
 };
+
 
 export const addProvider = async (
   provider: IProvider,
@@ -57,7 +56,6 @@ export const addProvider = async (
 
   const { sChainClient } = sChainState;
   let instance = await contractInstanceFromState(sChainState);
-
   instance.methods
     .addProviderName(provider.name, web3State.accounts[0])
     .send({ from: sChainClient.getCurrentUserAddress() });
@@ -68,6 +66,18 @@ export const addProvider = async (
     payload: provider
   });
 };
+
+
+export const addUser = async (
+  user: IUser,
+  web3State: IWeb3State,
+  sChainState: ISideChainState,
+  dispatch: any
+) => {
+  console.log("Action.addUser()");
+
+};
+
 
 /*
 
