@@ -7,11 +7,8 @@ export const FETCH_PROVIDERS_DATA = "FETCH_PROVIDERS_DATA";
 export const ADD_PROVIDER = "ADD_PROVIDER";
 export const ADD_USER = "ADD_USER";
 
-
 export const notify = (msg: string, success?: boolean) => {
-  !success
-    ? toast(msg)
-    : toast.success(msg, { autoClose: false });
+  !success ? toast(msg) : toast.success(msg, { autoClose: false });
 };
 
 export const notifyError = (msg: string) => {
@@ -44,7 +41,6 @@ export const fetchProviders = async (
   });
 };
 
-
 export const addProvider = async (
   provider: IProvider,
   web3State: IWeb3State,
@@ -67,7 +63,6 @@ export const addProvider = async (
   });
 };
 
-
 export const addUser = async (
   user: IUser,
   web3State: IWeb3State,
@@ -75,9 +70,18 @@ export const addUser = async (
   dispatch: any
 ) => {
   console.log("Action.addUser()");
+  const { sChainClient } = sChainState;
+  const instance = await contractInstanceFromState(sChainState);
+  instance.methods
+    .addUser(user.name, user.ethAddr, user.isProvider)
+    .send({ from: sChainClient.getCurrentUserAddress() });
 
+  console.log("sChain tx submitted - addUser");
+  return dispatch({
+    type: ADD_USER,
+    payload: user
+  });  
 };
-
 
 /*
 

@@ -8,6 +8,7 @@ export type Dispatch = React.Dispatch<IAction>;
 
 export interface IAppState {
   providerState: IProviderState;
+  userState: IUser;
 }
 
 export interface IWeb3State {

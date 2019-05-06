@@ -1,10 +1,15 @@
 import React from "react";
 import { IProviderState, IAction, IWeb3State, IAppState } from "./Interfaces";
-import { ADD_PROVIDER, FETCH_PROVIDERS_DATA } from "./Actions";
+import { ADD_PROVIDER, FETCH_PROVIDERS_DATA, ADD_USER } from "./Actions";
 
 const initialState: IAppState = {
   providerState: {
     providers: []
+  },
+  userState: {
+    name: "",
+    ethAddr: "",
+    isProvider: false
   }
 };
 
@@ -14,6 +19,11 @@ function reducer(state: IAppState, action: IAction | any): IAppState {
   switch (action.type) {
     case FETCH_PROVIDERS_DATA:
       return { ...state, providerState: {providers: action.payload} };
+    case ADD_USER:
+      return {
+        ...state,
+        userState: action.payload
+      };
     case ADD_PROVIDER:
       return {
         ...state,

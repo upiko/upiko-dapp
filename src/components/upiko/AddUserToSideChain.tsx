@@ -26,9 +26,10 @@ function AddUserToSideChain(props: any) {
         <Button
           type="dashed"
           onClick={() => {
+            const ethAddr = web3State.accounts[0];
             const currentUser: IUser = {
               name,
-              ethAddr: web3State.ethAddr,
+              ethAddr,
               isProvider: false
             };
             console.log("adding user", name);
