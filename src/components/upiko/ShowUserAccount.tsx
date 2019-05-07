@@ -3,19 +3,32 @@ import { withWeb3Contract } from '../chainstate/Web3StateWrap';
 import { withSChain } from '../chainstate/SideChainWrap';
 import { Card } from 'antd';
 import { Store } from '../../common/Store';
-
+import { fetchUser } from '../../common/Actions';
 
 
 function ShowUserAccount(props:any) {
   const { state, dispatch } = React.useContext(Store);
-  const userState = state.userState;
+  const { web3State, sChainState } = props;
+  const [inited, setInited] = React.useState(false);
+  const {name, isProvider} = state.userState;
+  const ethAddr = web3State.accounts[0];
+
+
+  const loadUser = async() => {
+    fetchUser(ethAddr, web3State, sChainState, dispatch);
+  }
+
+  if (!inited && sChainState.sChainClient) {
+    loadUser();
+    setInited(true);
+  }
 
   return (
     <div style={{ background: '#ECECEC', padding: '30px' }}>
       <Card title="User Account" bordered={false} >
-      <p>Eth Account: {props.web3State.accounts}</p>
-       <p>User name: {userState.name}</p>
-       <p>isProvider?: {userState.name ?  userState.isProvider.toString() : ""}</p>
+      <p>Eth Account: {ethAddr}</p>
+       <p>User name: {name}</p>
+       <p>isProvider?: {name ?  isProvider.toString() : ""}</p>
       </Card>
     </div>
   )

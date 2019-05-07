@@ -5,7 +5,8 @@ import { toast } from "react-toastify";
 
 export const FETCH_PROVIDERS_DATA = "FETCH_PROVIDERS_DATA";
 export const ADD_PROVIDER = "ADD_PROVIDER";
-export const ADD_USER = "ADD_USER";
+export const SET_USER = "SET_USER";
+
 
 export const notify = (msg: string, success?: boolean) => {
   !success ? toast(msg) : toast.success(msg, { autoClose: false });
@@ -14,6 +15,38 @@ export const notify = (msg: string, success?: boolean) => {
 export const notifyError = (msg: string) => {
   toast.error(msg, { autoClose: false });
 };
+
+
+export const fetchUser = async (
+  ethAddr: string,
+  web3State: IWeb3State,
+  sChainState: ISideChainState,
+  dispatch: any
+) => {
+  console.log("Action.fetchUser(), for addr:", ethAddr);
+  const { sChainClient } = sChainState;
+  let inflatedUser = {};
+  let instance = await contractInstanceFromState(sChainState);
+  let id = await instance.methods.idForEthAddr(ethAddr).call();
+  console.log("id", id);
+  let user = await instance.methods.users(id).call();
+
+  if (user.ethAddr === ethAddr){
+    console.log("matched on, ", ethAddr);
+    inflatedUser = user;   
+  }
+  
+
+  console.log(inflatedUser);
+
+  return dispatch({
+    type: SET_USER,
+    payload: inflatedUser
+  });  
+
+};
+
+
 
 export const fetchProviders = async (
   web3State: IWeb3State,
@@ -78,7 +111,7 @@ export const addUser = async (
 
   console.log("sChain tx submitted - addUser");
   return dispatch({
-    type: ADD_USER,
+    type: SET_USER,
     payload: user
   });  
 };

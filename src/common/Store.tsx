@@ -1,6 +1,6 @@
 import React from "react";
 import { IProviderState, IAction, IWeb3State, IAppState } from "./Interfaces";
-import { ADD_PROVIDER, FETCH_PROVIDERS_DATA, ADD_USER } from "./Actions";
+import { ADD_PROVIDER, FETCH_PROVIDERS_DATA, SET_USER } from "./Actions";
 
 const initialState: IAppState = {
   providerState: {
@@ -19,7 +19,7 @@ function reducer(state: IAppState, action: IAction | any): IAppState {
   switch (action.type) {
     case FETCH_PROVIDERS_DATA:
       return { ...state, providerState: {providers: action.payload} };
-    case ADD_USER:
+    case SET_USER:
       return {
         ...state,
         userState: action.payload
