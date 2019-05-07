@@ -4,17 +4,29 @@ import { Link } from '@reach/router';
 export default function Header() {
   return (
     <React.Fragment>
-        <header className="header">
-            <div>
-                <h4>upiko</h4>
+       <nav className="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+          <a className="navbar-brand" href="/"><p className="logo-text">upiko</p></a>
+          <button className="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarResponsive">
+              <span className="navbar-toggler-icon"></span>
+            </button>
+            <div className="collapse navbar-collapse" id="navbarResponsive">
+              <ul className="navbar-nav ml-auto">
+                <li className="nav-item">
+                  <a className="nav-link" href="/">Home</a>
+                </li>
+                <li className="nav-item">
+                  <a className="nav-link" href="/">Users</a>
+                </li>
+                <li className="nav-item">
+                  <a className="nav-link" href="/">Providers</a>
+                </li>
+                <li className="nav-item">
+                  <a className="nav-link" href="/test">Test</a>
+                </li>
+              </ul>
             </div>
-            <div>
-                <Link to="/">Home</Link>
-                <Link to="/register">Register</Link>
-                <Link to="/createsos">CreateSos</Link>
-                <Link to="/test">--=-*!--*-</Link>
-            </div>
-        </header>
+        </nav>
     </React.Fragment>
   )
 }

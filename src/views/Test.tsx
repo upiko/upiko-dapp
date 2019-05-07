@@ -5,11 +5,13 @@ import ChainStateRender from '../components/chainstate/ChainStateRender';
 
 export default function Test() {
   return (
-    <div>
-      <p>==--* test  +___=-`</p>
-      <ChainStateRender>
-        <MyTestDisplayComponent />
-      </ChainStateRender>
+    <div className="offset">
+      <div className="col-12 narrow text-center">
+        <p>==--* test  +___=-`</p>
+        <ChainStateRender>
+          <MyTestDisplayComponent />
+        </ChainStateRender>
+     </div>
     </div>
   )
 }

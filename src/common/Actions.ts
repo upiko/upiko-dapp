@@ -12,6 +12,7 @@ export const notify = (msg: string, success?: boolean) => {
   !success ? toast(msg) : toast.success(msg, { autoClose: false });
 };
 
+
 export const notifyError = (msg: string) => {
   toast.error(msg, { autoClose: false });
 };
@@ -28,24 +29,17 @@ export const fetchUser = async (
   let inflatedUser = {};
   let instance = await contractInstanceFromState(sChainState);
   let id = await instance.methods.idForEthAddr(ethAddr).call();
-  console.log("id", id);
   let user = await instance.methods.users(id).call();
 
-  if (user.ethAddr === ethAddr){
-    console.log("matched on, ", ethAddr);
-    inflatedUser = user;   
+  if (user.ethAddr === ethAddr) {
+    inflatedUser = user;
   }
-  
-
-  console.log(inflatedUser);
 
   return dispatch({
     type: SET_USER,
     payload: inflatedUser
-  });  
-
+  });
 };
-
 
 
 export const fetchProviders = async (
@@ -74,6 +68,7 @@ export const fetchProviders = async (
   });
 };
 
+
 export const addProvider = async (
   provider: IProvider,
   web3State: IWeb3State,
@@ -96,6 +91,7 @@ export const addProvider = async (
   });
 };
 
+
 export const addUser = async (
   user: IUser,
   web3State: IWeb3State,
@@ -113,7 +109,7 @@ export const addUser = async (
   return dispatch({
     type: SET_USER,
     payload: user
-  });  
+  });
 };
 
 /*
