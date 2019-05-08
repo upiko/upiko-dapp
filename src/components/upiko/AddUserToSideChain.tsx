@@ -12,8 +12,8 @@ function AddUserToSideChain(props: any) {
   const [name, setName] = React.useState("");
   return (
     <div className="container-fluid">
-      <div className="card-body col-md-6">
-        <p>Create User</p>
+      <div className="card col-8">
+        <p className="strong-p">User</p>
         <Input
           className="form-control"
           placeholder="User name"
@@ -23,22 +23,24 @@ function AddUserToSideChain(props: any) {
             setName(value);
           }}
         />
-        <Button
-          type="dashed"
-          onClick={() => {
-            const ethAddr = web3State.accounts[0];
-            const currentUser: IUser = {
-              name,
-              ethAddr,
-              isProvider: false
-            };
-            console.log("adding user", name);
-            addUser(currentUser, web3State, sChainState, dispatch);
-            setName("");
-          }}
-        >
-          Create
-        </Button>
+        <div className="row">
+          <Button
+            type="dashed"
+            onClick={() => {
+              const ethAddr = web3State.accounts[0];
+              const currentUser: IUser = {
+                name,
+                ethAddr,
+                isProvider: false
+              };
+              console.log("adding user", name);
+              addUser(currentUser, web3State, sChainState, dispatch);
+              setName("");
+            }}
+          >
+            Create
+          </Button>
+        </div>
       </div>
     </div>
   );

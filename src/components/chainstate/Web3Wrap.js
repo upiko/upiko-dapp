@@ -38,7 +38,6 @@ class Web3Wrap extends Component {
      this.setState({
        account: accounts[0]
      });
-     //this.forceUpdate();
     }
     
   };
