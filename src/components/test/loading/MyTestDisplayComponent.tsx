@@ -9,15 +9,11 @@ function MyTestDisplayComponent(props: any) {
 
   return (
     <div className="container mydisplay-container">
-     
       <ShowUserAccount />
-
       <AddUserToSideChain />
-       
     </div>
   );
 }
-
 
 
 export default MyTestDisplayComponent;

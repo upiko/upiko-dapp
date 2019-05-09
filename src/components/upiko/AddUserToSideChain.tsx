@@ -1,5 +1,5 @@
 import React from "react";
-import { Input, Button } from "antd";
+import { Input, Button, Card } from "antd";
 import { Store } from "./../../common/Store";
 import { withWeb3Contract } from "../chainstate/Web3StateWrap";
 import { withSChain } from "../chainstate/SideChainWrap";
@@ -11,9 +11,9 @@ function AddUserToSideChain(props: any) {
   const { web3State, sChainState } = props;
   const [name, setName] = React.useState("");
   return (
-    <div className="container-fluid">
-      <div className="card col-8">
-        <p className="strong-p">User</p>
+    <div style={{ background: '#ECECEC', padding: '30px' }}>
+      <Card title="Add User" bordered={false} >
+        <p className="strong-p">Enter details for new user</p>
         <Input
           className="form-control"
           placeholder="User name"
@@ -40,8 +40,8 @@ function AddUserToSideChain(props: any) {
           >
             Create
           </Button>
-        </div>
       </div>
+      </Card>
     </div>
   );
 }

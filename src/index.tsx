@@ -3,10 +3,10 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import { StoreProvider, Store } from "./common/Store";
 import { Router, RouteComponentProps } from "@reach/router";
-import './bootstrap.min.css';
-import './style.css';
-import './fixed.css';
 import "antd/dist/antd.css";
+import './bootstrap.min.css';
+import './fixed.css';
+import './style.css';
 
 import Main from "./views/Main";
 import Register from "./views/Register";

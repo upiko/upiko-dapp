@@ -7,11 +7,14 @@ export default function Test() {
   return (
     <div className="offset">
       <div className="jumbotron">
-        <div className="col-12 narrow">
-          <p>==--* test  +___=-`</p>
-          <ChainStateRender>
-            <MyTestDisplayComponent />
-          </ChainStateRender>
+        <div className="narrow">
+          <div className="col-12">
+            <h3 className="heading text-center">==--* test  +___=-`</h3>
+            <div className="heading-underline"></div>
+            <ChainStateRender>
+              <MyTestDisplayComponent />
+            </ChainStateRender>
+          </div>
         </div>
       </div>
     </div>
