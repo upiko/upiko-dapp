@@ -19,12 +19,13 @@ export const notifyError = (msg: string) => {
   toast.error(msg, { autoClose: false });
 };
 
+
 export const fetchUsers = async(
   web3State: IWeb3State,
   sChainState: ISideChainState,
   dispatch: any
 ) => {
-  console.log("Action.fetchUsers()");
+  //console.log("Action.fetchUsers()");
   let instance = await contractInstanceFromState(sChainState);
   let userCount = await instance.methods.numberOfUsers().call();
   let users = [];

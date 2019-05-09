@@ -14,6 +14,7 @@ import Test from './views/Test';
 import SoSes from './views/SoSes';
 import Users from './views/Users';
 import Providers from './views/Providers';
+import Skills from "./views/Skills";
 
 
 
@@ -29,6 +30,7 @@ ReactDOM.render(
         <RouterPage pageComponent={<SoSes />} path="/soses" />
         <RouterPage pageComponent={<Users />} path="/users" />
         <RouterPage pageComponent={<Providers />} path="/providers" />
+        <RouterPage pageComponent={<Skills />} path="/skills" />
       </App>
     </Router>
   </StoreProvider>,
