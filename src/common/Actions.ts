@@ -2,10 +2,12 @@ import { IProvider, IUser, IWeb3State, ISideChainState } from "./Interfaces";
 import { contractInstanceFromState } from "./../utils/sideChainUtils";
 import _ from "lodash";
 import { toast } from "react-toastify";
+import { ConsolidateDelegationsRequest } from "loom-js/dist/proto/dposv3_pb";
 
 export const FETCH_PROVIDERS_DATA = "FETCH_PROVIDERS_DATA";
 export const ADD_PROVIDER = "ADD_PROVIDER";
 export const SET_USER = "SET_USER";
+export const ALL_USERS = "ALL_USERS";
 
 
 export const notify = (msg: string, success?: boolean) => {
@@ -17,6 +19,25 @@ export const notifyError = (msg: string) => {
   toast.error(msg, { autoClose: false });
 };
 
+export const fetchUsers = async(
+  web3State: IWeb3State,
+  sChainState: ISideChainState,
+  dispatch: any
+) => {
+  console.log("Action.fetchUsers()");
+  let instance = await contractInstanceFromState(sChainState);
+  let userCount = await instance.methods.numberOfUsers().call();
+  let users = [];
+  for (let i=0; i < userCount; i++){
+    let nextUser = await instance.methods.users(i).call();
+    users.push(nextUser);
+  }
+  return dispatch({
+    type: ALL_USERS,
+    payload: users
+  });
+}
+
 
 export const fetchUser = async (
   ethAddr: string,
@@ -24,7 +45,7 @@ export const fetchUser = async (
   sChainState: ISideChainState,
   dispatch: any
 ) => {
-  console.log("Action.fetchUser(), for addr:", ethAddr);
+  //console.log("Action.fetchUser(), for addr:", ethAddr);
   const { sChainClient } = sChainState;
   let inflatedUser = {};
   let instance = await contractInstanceFromState(sChainState);

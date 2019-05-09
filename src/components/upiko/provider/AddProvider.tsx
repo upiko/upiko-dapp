@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Input, Button } from "antd";
-import { addProvider } from "./../../common/Actions";
-import { Store } from "./../../common/Store";
-import { IProvider } from "./../../common/Interfaces";
-import { withWeb3Contract } from "../chainstate/Web3StateWrap";
-import { withSChain } from "../chainstate/SideChainWrap";
+import { addProvider } from "../../../common/Actions";
+import { Store } from "../../../common/Store";
+import { IProvider } from "../../../common/Interfaces";
+import { withWeb3Contract } from "../../chainstate/Web3StateWrap";
+import { withSChain } from "../../chainstate/SideChainWrap";
 
 
 function AddProvider(props: any) {

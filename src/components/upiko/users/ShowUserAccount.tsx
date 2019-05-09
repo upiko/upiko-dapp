@@ -1,9 +1,9 @@
 import React from 'react'
-import { withWeb3Contract } from '../chainstate/Web3StateWrap';
-import { withSChain } from '../chainstate/SideChainWrap';
+import { withWeb3Contract } from '../../chainstate/Web3StateWrap';
+import { withSChain } from '../../chainstate/SideChainWrap';
 import { Card } from 'antd';
-import { Store } from '../../common/Store';
-import { fetchUser } from '../../common/Actions';
+import { Store } from '../../../common/Store';
+import { fetchUser } from '../../../common/Actions';
 
 
 function ShowUserAccount(props:any) {
@@ -25,7 +25,7 @@ function ShowUserAccount(props:any) {
 
   return (
     <div style={{ background: '#ECECEC', padding: '30px' }}>
-      <Card title="User Account" bordered={false} >
+      <Card title="Current User Account" bordered={false} >
       <p>Eth Account: {ethAddr}</p>
        <p>User name: {name}</p>
        <p>isProvider?: {name ?  isProvider.toString() : ""}</p>

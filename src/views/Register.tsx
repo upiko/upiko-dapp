@@ -6,7 +6,7 @@ import Footer from "./Footer";
 
 
 const RegisterProvider = React.lazy(() =>
-  import("../components/upiko/RegisterProvider")
+  import("../components/upiko/provider/RegisterProvider")
 );
 
 export default function Register() {

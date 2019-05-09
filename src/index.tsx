@@ -11,7 +11,10 @@ import './style.css';
 import Main from "./views/Main";
 import Register from "./views/Register";
 import Test from './views/Test';
-import CreateSoS from './views/CreateSoS';
+import SoSes from './views/SoSes';
+import Users from './views/Users';
+import Providers from './views/Providers';
+
 
 
 const RouterPage = (props: { pageComponent: JSX.Element } & RouteComponentProps) => props.pageComponent;
@@ -23,7 +26,9 @@ ReactDOM.render(
         <RouterPage pageComponent={<Main />} path="/" />
         <RouterPage pageComponent={<Register />} path="/register" />
         <RouterPage pageComponent={<Test />} path="/test" />
-        <RouterPage pageComponent={<CreateSoS />} path="/createsos" />
+        <RouterPage pageComponent={<SoSes />} path="/soses" />
+        <RouterPage pageComponent={<Users />} path="/users" />
+        <RouterPage pageComponent={<Providers />} path="/providers" />
       </App>
     </Router>
   </StoreProvider>,

@@ -9,6 +9,7 @@ export type Dispatch = React.Dispatch<IAction>;
 export interface IAppState {
   providerState: IProviderState;
   userState: IUser;
+  usersState: IUsers;
 }
 
 export interface IWeb3State {
@@ -29,6 +30,10 @@ export interface IProps {
 export interface IProvider {
   name: string;
 }
+
+export interface IUsers{
+  users: Array<IUser>;
+}  
 
 export interface IUser {
   name: string;

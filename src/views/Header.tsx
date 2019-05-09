@@ -16,10 +16,13 @@ export default function Header() {
                   <a className="nav-link" href="/">Home</a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="/">Users</a>
+                  <a className="nav-link" href="/users">Users</a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="/">Providers</a>
+                  <a className="nav-link" href="/providers">Providers</a>
+                </li>
+                <li className="nav-item">
+                  <a className="nav-link" href="/soses">Soses</a>
                 </li>
                 <li className="nav-item">
                   <a className="nav-link" href="/test">Test</a>

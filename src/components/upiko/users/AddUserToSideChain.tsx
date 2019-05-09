@@ -1,10 +1,10 @@
 import React from "react";
 import { Input, Button, Card } from "antd";
-import { Store } from "./../../common/Store";
-import { withWeb3Contract } from "../chainstate/Web3StateWrap";
-import { withSChain } from "../chainstate/SideChainWrap";
-import { addUser } from "../../common/Actions";
-import { IProvider, IUser } from "../../common/Interfaces";
+import { Store } from "../../../common/Store";
+import { withWeb3Contract } from "../../chainstate/Web3StateWrap";
+import { withSChain } from "../../chainstate/SideChainWrap";
+import { addUser } from "../../../common/Actions";
+import { IProvider, IUser } from "../../../common/Interfaces";
 
 function AddUserToSideChain(props: any) {
   const { state, dispatch } = React.useContext(Store);

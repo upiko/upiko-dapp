@@ -1,6 +1,6 @@
 import React from 'react'
-import { Store } from "../../common/Store";
-import { fetchProviders } from "../../common/Actions";
+import { Store } from "../../../common/Store";
+import { fetchProviders } from "../../../common/Actions";
 
 
 
