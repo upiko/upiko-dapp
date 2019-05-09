@@ -2,12 +2,12 @@ import { IProvider, IUser, IWeb3State, ISideChainState } from "./Interfaces";
 import { contractInstanceFromState } from "./../utils/sideChainUtils";
 import _ from "lodash";
 import { toast } from "react-toastify";
-import { ConsolidateDelegationsRequest } from "loom-js/dist/proto/dposv3_pb";
 
 export const FETCH_PROVIDERS_DATA = "FETCH_PROVIDERS_DATA";
 export const ADD_PROVIDER = "ADD_PROVIDER";
 export const SET_USER = "SET_USER";
 export const ALL_USERS = "ALL_USERS";
+export const SKILLS_LIST = "SKILLS_LIST";
 
 
 export const notify = (msg: string, success?: boolean) => {
@@ -19,6 +19,28 @@ export const notifyError = (msg: string) => {
   toast.error(msg, { autoClose: false });
 };
 
+
+export const fetchSkills = async(
+  web3State: IWeb3State,
+  sChainState: ISideChainState,
+  dispatch: any
+) => {
+  console.log("Action.fetchSkills()");
+  let instance = await contractInstanceFromState(sChainState);
+  let skillsCount = await instance.methods.numberOfSkills().call();
+
+  console.log("skillsCount:", skillsCount);
+
+  let skills = [];
+  for (let i=0; i < skillsCount; i++){
+    let nextSkill = await instance.methods.skillsList(i).call();
+    skills.push(nextSkill);
+  }
+  return dispatch({
+    type: SKILLS_LIST,
+    payload: skills
+  });
+}
 
 export const fetchUsers = async(
   web3State: IWeb3State,

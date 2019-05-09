@@ -10,6 +10,7 @@ export interface IAppState {
   providerState: IProviderState;
   userState: IUser;
   usersState: IUsers;
+  skillsList: ISkillsList;
 }
 
 export interface IWeb3State {
@@ -25,6 +26,14 @@ export interface ISideChainState {
 
 export interface IProps {
   providers: Array<IProvider>;
+}
+
+export interface ISkillsList {
+  skills: Array<ISkill>;
+}
+
+export interface ISkill {
+  skillName: string;
 }
 
 export interface IProvider {
