@@ -1,16 +1,10 @@
 import React from "react";
 import { fetchSkills } from "../../../common/Actions";
-import { IWeb3State, ISideChainState, Dispatch } from "../../../common/Interfaces";
+import { IWeb3State, ISideChainState, Dispatch, IChainStateProps } from "../../../common/Interfaces";
 
 
-interface IChainStateProps{
-  web3State: IWeb3State;
-  sChainState: ISideChainState;
-  dispatch: Dispatch;
-}
 
-
-function MyTestDisplayComponent(props: IChainStateProps) {
+function MyTestDisplayComponent(props: IChainStateProps ) {
   const { web3State, sChainState, dispatch } = props;
 
   React.useEffect(() => {

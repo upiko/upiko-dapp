@@ -13,6 +13,7 @@ export interface IAppState {
   skillsList: ISkillsList;
 }
 
+
 export interface IWeb3State {
   web3: any;
   accounts: any;
@@ -24,9 +25,13 @@ export interface ISideChainState {
   sChainContract: any;
 }
 
-export interface IProps {
-  providers: Array<IProvider>;
+
+export interface IChainStateProps{
+  web3State: IWeb3State;
+  sChainState: ISideChainState;
+  dispatch: Dispatch;
 }
+
 
 export interface ISkillsList {
   skills: Array<ISkill>;
