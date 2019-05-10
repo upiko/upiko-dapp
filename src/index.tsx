@@ -18,19 +18,20 @@ import Skills from "./views/Skills";
 
 
 
+
 const RouterPage = (props: { pageComponent: JSX.Element } & RouteComponentProps) => props.pageComponent;
 
 ReactDOM.render(
   <StoreProvider>
     <Router>
-      <App path="/">
-        <RouterPage pageComponent={<Main />} path="/" />
-        <RouterPage pageComponent={<Register />} path="/register" />
-        <RouterPage pageComponent={<Test />} path="/test" />
-        <RouterPage pageComponent={<SoSes />} path="/soses" />
-        <RouterPage pageComponent={<Users />} path="/users" />
-        <RouterPage pageComponent={<Providers />} path="/providers" />
-        <RouterPage pageComponent={<Skills />} path="/skills" />
+      <App path="/">        
+          <RouterPage pageComponent={<Main />} path="/" />
+          <RouterPage pageComponent={<Register />} path="/register" />
+          <RouterPage pageComponent={<Test />} path="/test" />
+          <RouterPage pageComponent={<SoSes />} path="/soses" />
+          <RouterPage pageComponent={<Users />} path="/users" />
+          <RouterPage pageComponent={<Providers />} path="/providers" />
+          <RouterPage pageComponent={<Skills />} path="/skills" />
       </App>
     </Router>
   </StoreProvider>,
