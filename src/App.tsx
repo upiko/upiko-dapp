@@ -16,9 +16,9 @@ export default function App(props: any): JSX.Element {
     <React.Fragment>
       <Header />
         <ToastContainer />
-        <ChainStateRender>
-          {props.children}
-        </ChainStateRender>
+          <ChainStateRender>
+            {props.children}
+          </ChainStateRender>
       <Footer />
     </React.Fragment>
   );

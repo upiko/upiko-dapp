@@ -1,11 +1,13 @@
 import React from "react";
 import { fetchSkills } from "../../../common/Actions";
 import { IWeb3State, ISideChainState, Dispatch, IChainStateProps } from "../../../common/Interfaces";
+import { Store } from "../../../common/Store";
 
 
 
-function MyTestDisplayComponent(props: IChainStateProps ) {
-  const { web3State, sChainState, dispatch } = props;
+function MyTestDisplayComponent(props: any ) {
+  const { web3State, sChainState} = props;
+  const { state, dispatch } = React.useContext(Store);
 
   React.useEffect(() => {
     console.log("MyTestDisplayComponent.useEffect()");

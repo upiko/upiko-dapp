@@ -29,7 +29,6 @@ export interface ISideChainState {
 export interface IChainStateProps{
   web3State: IWeb3State;
   sChainState: ISideChainState;
-  dispatch: Dispatch;
 }
 
 
