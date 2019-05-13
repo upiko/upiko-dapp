@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
-import { StoreProvider, Store } from "./common/Store";
+import { StoreProvider, Store, ChainStateStoreProvider } from "./common/Store";
 import { Router, RouteComponentProps } from "@reach/router";
 import "antd/dist/antd.css";
 import './bootstrap.min.css';
@@ -23,17 +23,19 @@ const RouterPage = (props: { pageComponent: JSX.Element } & RouteComponentProps)
 
 ReactDOM.render(
   <StoreProvider>
-    <Router>
-      <App path="/">        
-          <RouterPage pageComponent={<Main />} path="/" />
-          <RouterPage pageComponent={<Register />} path="/register" />
-          <RouterPage pageComponent={<Test />} path="/test" />
-          <RouterPage pageComponent={<SoSes />} path="/soses" />
-          <RouterPage pageComponent={<Users />} path="/users" />
-          <RouterPage pageComponent={<Providers />} path="/providers" />
-          <RouterPage pageComponent={<Skills />} path="/skills" />
-      </App>
-    </Router>
+    <ChainStateStoreProvider>
+      <Router>
+        <App path="/">        
+            <RouterPage pageComponent={<Main />} path="/" />
+            <RouterPage pageComponent={<Register />} path="/register" />
+            <RouterPage pageComponent={<Test />} path="/test" />
+            <RouterPage pageComponent={<SoSes />} path="/soses" />
+            <RouterPage pageComponent={<Users />} path="/users" />
+            <RouterPage pageComponent={<Providers />} path="/providers" />
+            <RouterPage pageComponent={<Skills />} path="/skills" />
+        </App>
+      </Router>
+    </ChainStateStoreProvider>
   </StoreProvider>,
   document.getElementById("root")
 );

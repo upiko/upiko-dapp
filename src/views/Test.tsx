@@ -1,16 +1,11 @@
 import React from 'react'
 import MyTestDisplayComponent from '../components/test/loading/MyTestDisplayComponent';
 import ChainStateRender from '../components/chainstate/ChainStateRender';
-import { withWeb3 } from '../components/chainstate/Web3Wrap';
-import { withSChain } from '../components/chainstate/SideChainWrap';
-import { Store } from '../common/Store';
-import { withWeb3Contract } from '../components/chainstate/Web3StateWrap';
 
 
-function Test(props:any) {
-  const { state, dispatch } = React.useContext(Store);
-  const { web3State, sChainState } = props;
 
+export default function Test(props:any) {
+ 
   return (
     <div className="offset">
       <div className="jumbotron">
@@ -18,12 +13,12 @@ function Test(props:any) {
           <div className="col-12">
             <h3 className="heading text-center">==--* test  +___=-`</h3>
             <div className="heading-underline"></div>
-              <MyTestDisplayComponent dispatch={dispatch} web3State={web3State} sChainState={sChainState} />
+            <ChainStateRender>
+              <MyTestDisplayComponent />
+            </ChainStateRender>
           </div>
         </div>
       </div>
     </div>
   )
 }
-
-export default withWeb3Contract(withSChain(Test));

@@ -13,7 +13,17 @@ function ShowUserAccount(props:any) {
   const {name, isProvider} = state.userState;
   const ethAddr = web3State.accounts[0];
 
+  /*
+  React.useEffect(()=> {
+    const doFetch = async() => {
+      if (sChainState.sChainClient){
+        fetchUser(ethAddr, web3State, sChainState, dispatch);
+      }
+    }
+    doFetch();
+  }, []);*/
 
+  
   const loadUser = async() => {
     fetchUser(ethAddr, web3State, sChainState, dispatch);
   }
@@ -22,6 +32,7 @@ function ShowUserAccount(props:any) {
     loadUser();
     setInited(true);
   }
+  
 
   return (
     <div style={{ background: '#ECECEC', padding: '30px' }}>

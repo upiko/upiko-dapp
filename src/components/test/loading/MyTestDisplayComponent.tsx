@@ -1,28 +1,22 @@
 import React from "react";
-import { fetchSkills } from "../../../common/Actions";
-import { IWeb3State, ISideChainState, Dispatch, IChainStateProps } from "../../../common/Interfaces";
-import { Store } from "../../../common/Store";
+import { withWeb3Contract } from "../../chainstate/Web3StateWrap";
+import { withSChain } from "../../chainstate/SideChainWrap";
+import MyTestDisplayChild from "../MyTestDisplayChild";
 
 
 
 function MyTestDisplayComponent(props: any ) {
   const { web3State, sChainState} = props;
-  const { state, dispatch } = React.useContext(Store);
 
-  React.useEffect(() => {
-    console.log("MyTestDisplayComponent.useEffect()");
-    console.log("props=", props);
-    fetchSkills(web3State, sChainState, dispatch);
-  }, []);
-
-
+  console.log("MyTestDisplayComponent", web3State, sChainState);
+ 
   return (
     <div className="container mydisplay-container">
       <p>skills</p>
-
       <p>sos</p>
+      <MyTestDisplayChild />
     </div>
   );
 }
 
-export default MyTestDisplayComponent;
+export default withWeb3Contract(withSChain(MyTestDisplayComponent));

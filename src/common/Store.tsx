@@ -1,5 +1,5 @@
 import React from "react";
-import { IProviderState, IAction, IWeb3State, IAppState } from "./Interfaces";
+import {IAction, IAppState, IChainState } from "./Interfaces";
 import {
   ADD_PROVIDER,
   FETCH_PROVIDERS_DATA,
@@ -7,7 +7,11 @@ import {
   ALL_USERS,
   SKILLS_LIST
 } from "./Actions";
+import { any } from "prop-types";
 
+
+//ETH CONTRACT
+//SCHAIN CONTRACT
 
 const initialState: IAppState = {
   providerState: {
@@ -20,13 +24,32 @@ const initialState: IAppState = {
   },
   usersState: {
     users: []
-  },
+  }, 
   skillsList: {
     skills: []
   }
 };
 
+const initialChainState: IChainState = {
+  web3State : {
+    web3: {},
+    accounts: [],
+    contract: {}
+  },
+  sChainState: {
+    sChainClient: {},
+    sChainContract: {}
+  }
+};
+
 export const Store = React.createContext<IAppState | any>(initialState);
+export const ChainStateStore = React.createContext<IChainState | any> (initialChainState);
+
+
+function initializeChainState() :IChainState {
+  return initialChainState;
+}
+
 
 
 function reducer(state: IAppState, action: IAction | any): IAppState {
@@ -58,4 +81,13 @@ export function StoreProvider(props: any): JSX.Element {
       {props.children}
     </Store.Provider>
   );
+}
+
+export function ChainStateStoreProvider(props:any): JSX.Element {
+  //React.useWeb3  or initialize now
+  //React.useSChain
+ return ( <ChainStateStore.Provider value={{initialChainState}}>
+            {props.children}
+          </ChainStateStore.Provider>
+        );
 }

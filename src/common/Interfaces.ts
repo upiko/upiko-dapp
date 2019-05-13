@@ -13,6 +13,11 @@ export interface IAppState {
   skillsList: ISkillsList;
 }
 
+export interface IChainState{
+  web3State: IWeb3State;
+  sChainState: ISideChainState;
+}
+
 
 export interface IWeb3State {
   web3: any;
@@ -23,12 +28,6 @@ export interface IWeb3State {
 export interface ISideChainState {
   sChainClient: any;
   sChainContract: any;
-}
-
-
-export interface IChainStateProps{
-  web3State: IWeb3State;
-  sChainState: ISideChainState;
 }
 
 
