@@ -1,14 +1,14 @@
 import React from 'react'
-import { Store } from '../../common/Store';
-import { fetchSkills } from '../../common/Actions';
+import { Store, ChainStateStore } from '../../common/Store';
+
 
 
 export default function MyTestDisplayChild(props:any) {
-  const { web3State, sChainState} = props;
   const { state, dispatch } = React.useContext(Store);
+  const { web3State, sChainState} = React.useContext(ChainStateStore);
+
 
   //console.log("MyTestDisplay Child()", web3State, sChainState);
-
 /*
   React.useEffect(() => {
     console.log("MyTestDisplayComponent.useEffect()");
@@ -19,6 +19,10 @@ export default function MyTestDisplayChild(props:any) {
     }
   });
 */
+  /*console.log("state", state);
+  console.log("props", props);
+  console.log("web3State", web3State);
+  console.log("sChainstate", sChainState);*/
 
   return (
    <React.Fragment>

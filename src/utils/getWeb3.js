@@ -1,10 +1,16 @@
 import Web3 from "web3";
-import {WEB3_FALLBACK_PORT} from './../config';
+import { WEB3_FALLBACK_PORT } from "./../config";
+
+export const metaMaskWeb3 = () => {
+  if (window.web3) {
+    return new Web3(window.web3.currentProvider)
+  }
+}
 
 const getWeb3 = () =>
   new Promise((resolve, reject) => {
     // Wait for loading completion to avoid race conditions with web3 injection timing.
-        
+
     window.addEventListener("load", async () => {
       // Modern dapp browsers...
       if (window.ethereum) {
@@ -15,7 +21,7 @@ const getWeb3 = () =>
           // Acccounts now exposed
           resolve(web3);
         } catch (error) {
-          reject(error);
+            reject(error);
         }
       }
       // Legacy dapp browsers...

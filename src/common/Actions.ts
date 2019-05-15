@@ -1,7 +1,18 @@
-import { IProvider, IUser, IWeb3State, ISideChainState } from "./Interfaces";
+import React from 'react';
+import {
+  IProvider,
+  IUser,
+  IWeb3State,
+  ISideChainState,
+  Dispatch
+} from "./Interfaces";
 import { contractInstanceFromState } from "./../utils/sideChainUtils";
 import _ from "lodash";
 import { toast } from "react-toastify";
+import { ChainStateStore, Store } from "./Store";
+import Web3 from 'web3';
+import getWeb3, {metaMaskWeb3} from '../utils/getWeb3';
+
 
 export const FETCH_PROVIDERS_DATA = "FETCH_PROVIDERS_DATA";
 export const ADD_PROVIDER = "ADD_PROVIDER";
@@ -9,18 +20,28 @@ export const SET_USER = "SET_USER";
 export const ALL_USERS = "ALL_USERS";
 export const SKILLS_LIST = "SKILLS_LIST";
 
-
 export const notify = (msg: string, success?: boolean) => {
   !success ? toast(msg) : toast.success(msg, { autoClose: false });
 };
-
 
 export const notifyError = (msg: string) => {
   toast.error(msg, { autoClose: false });
 };
 
+export const fetchAny = async () => {
+  console.log("Action.fetchAny()");
+  const {dispatch} = React.useContext(Store);
+  const {web3State, sChainState} = React.useContext(ChainStateStore);
 
-export const fetchSkills = async(
+  if (_.isUndefined(web3State) || _.isUndefined(sChainState)){
+    console.log("one or both chianstate store states are not undefined (not initialized), attempting to initialize");
+    initChainStateStore(dispatch);
+  }
+  console.log("chainstate", web3State, sChainState);
+};
+
+
+export const fetchSkills = async (
   web3State: IWeb3State,
   sChainState: ISideChainState,
   dispatch: any
@@ -32,7 +53,7 @@ export const fetchSkills = async(
   console.log("skillsCount:", skillsCount);
 
   let skills = [];
-  for (let i=0; i < skillsCount; i++){
+  for (let i = 0; i < skillsCount; i++) {
     let nextSkill = await instance.methods.skillsList(i).call();
     skills.push(nextSkill);
   }
@@ -40,9 +61,9 @@ export const fetchSkills = async(
     type: SKILLS_LIST,
     payload: skills
   });
-}
+};
 
-export const fetchUsers = async(
+export const fetchUsers = async (
   web3State: IWeb3State,
   sChainState: ISideChainState,
   dispatch: any
@@ -51,7 +72,7 @@ export const fetchUsers = async(
   let instance = await contractInstanceFromState(sChainState);
   let userCount = await instance.methods.numberOfUsers().call();
   let users = [];
-  for (let i=0; i < userCount; i++){
+  for (let i = 0; i < userCount; i++) {
     let nextUser = await instance.methods.users(i).call();
     users.push(nextUser);
   }
@@ -59,8 +80,7 @@ export const fetchUsers = async(
     type: ALL_USERS,
     payload: users
   });
-}
-
+};
 
 export const fetchUser = async (
   ethAddr: string,
@@ -84,7 +104,6 @@ export const fetchUser = async (
     payload: inflatedUser
   });
 };
-
 
 export const fetchProviders = async (
   web3State: IWeb3State,
@@ -112,7 +131,6 @@ export const fetchProviders = async (
   });
 };
 
-
 export const addProvider = async (
   provider: IProvider,
   web3State: IWeb3State,
@@ -135,7 +153,6 @@ export const addProvider = async (
   });
 };
 
-
 export const addUser = async (
   user: IUser,
   web3State: IWeb3State,
@@ -155,6 +172,12 @@ export const addUser = async (
     payload: user
   });
 };
+
+export const initChainStateStore = async (dispath:Dispatch) => {
+  //getWeb3
+  console.log("Action.initChainStateStore");
+  let web3 = await metaMaskWeb3();
+}
 
 /*
 

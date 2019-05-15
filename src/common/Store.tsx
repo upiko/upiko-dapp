@@ -86,8 +86,9 @@ export function StoreProvider(props: any): JSX.Element {
 export function ChainStateStoreProvider(props:any): JSX.Element {
   //React.useWeb3  or initialize now
   //React.useSChain
- return ( <ChainStateStore.Provider value={{initialChainState}}>
-            {props.children}
-          </ChainStateStore.Provider>
-        );
+  return ( 
+    <ChainStateStore.Provider value={{initialChainState}}>
+       {props.children}
+    </ChainStateStore.Provider>
+  );
 }
