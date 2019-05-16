@@ -1,5 +1,5 @@
 import React from "react";
-import {IAction, IAppState, IChainState } from "./Interfaces";
+import {IAction, IAppState, IChainState, IWeb3State, ISideChainState } from "./Interfaces";
 import {
   ADD_PROVIDER,
   FETCH_PROVIDERS_DATA,
@@ -7,7 +7,8 @@ import {
   ALL_USERS,
   SKILLS_LIST
 } from "./Actions";
-import { any } from "prop-types";
+import { metaMaskWeb3 } from "../utils/getWeb3";
+
 
 
 //ETH CONTRACT
@@ -30,26 +31,21 @@ const initialState: IAppState = {
   }
 };
 
-const initialChainState: IChainState = {
-  web3State : {
-    web3: {},
-    accounts: [],
-    contract: {}
-  },
-  sChainState: {
-    sChainClient: {},
-    sChainContract: {}
-  }
-};
+const initialChainState = {
+    web3State : {
+      web3: {},
+      accounts: [],
+      contract: {}
+    },
+    sChainState: {
+      sChainClient: {},
+      sChainContract: {}
+    }
+  };
+  
 
 export const Store = React.createContext<IAppState | any>(initialState);
 export const ChainStateStore = React.createContext<IChainState | any> (initialChainState);
-
-
-function initializeChainState() :IChainState {
-  return initialChainState;
-}
-
 
 
 function reducer(state: IAppState, action: IAction | any): IAppState {
@@ -83,11 +79,15 @@ export function StoreProvider(props: any): JSX.Element {
   );
 }
 
-export function ChainStateStoreProvider(props:any): JSX.Element {
   //React.useWeb3  or initialize now
   //React.useSChain
+export function ChainStateStoreProvider(props:any): JSX.Element {
+
+  const web3State =  initialChainState.web3State;
+  const sChainState = initialChainState.sChainState;
+
   return ( 
-    <ChainStateStore.Provider value={{initialChainState}}>
+    <ChainStateStore.Provider value={{web3State, sChainState}}>
        {props.children}
     </ChainStateStore.Provider>
   );

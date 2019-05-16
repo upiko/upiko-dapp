@@ -3,19 +3,19 @@ import { withWeb3Contract } from "../../chainstate/Web3StateWrap";
 import { withSChain } from "../../chainstate/SideChainWrap";
 import MyTestDisplayChild from "../MyTestDisplayChild";
 import { Store, ChainStateStore } from "../../../common/Store";
-import { fetchAny } from "../../../common/Actions";
+import { fetchNone } from "../../../common/Actions";
 
 
 
 function MyTestDisplayComponent(props: any ) {
   const { state, dispatch } = React.useContext(Store);
-  const { web3State, sChainState} = React.useContext(ChainStateStore);
+  const { web3State, sChainState } = React.useContext(ChainStateStore);
 
   console.log("MyTestDisplayComponent", web3State, sChainState);
 
   const load = async() => {
     console.log("load()");
-    fetchAny();
+    fetchNone();
   }
 
   load();
@@ -29,4 +29,4 @@ function MyTestDisplayComponent(props: any ) {
   );
 }
 
-export default withWeb3Contract(withSChain(MyTestDisplayComponent));
+export default MyTestDisplayComponent;

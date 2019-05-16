@@ -28,7 +28,7 @@ export const notifyError = (msg: string) => {
   toast.error(msg, { autoClose: false });
 };
 
-export const fetchAny = async () => {
+export const fetchNone = async () => {
   console.log("Action.fetchAny()");
   const {dispatch} = React.useContext(Store);
   const {web3State, sChainState} = React.useContext(ChainStateStore);
