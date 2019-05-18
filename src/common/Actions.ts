@@ -14,6 +14,8 @@ import Web3 from 'web3';
 import getWeb3, {metaMaskWeb3} from '../utils/getWeb3';
 
 
+
+
 export const FETCH_PROVIDERS_DATA = "FETCH_PROVIDERS_DATA";
 export const ADD_PROVIDER = "ADD_PROVIDER";
 export const SET_USER = "SET_USER";
@@ -30,14 +32,8 @@ export const notifyError = (msg: string) => {
 
 export const fetchNone = async () => {
   console.log("Action.fetchAny()");
-  const {dispatch} = React.useContext(Store);
-  const {web3State, sChainState} = React.useContext(ChainStateStore);
-
-  if (_.isUndefined(web3State) || _.isUndefined(sChainState)){
-    console.log("one or both chianstate store states are not undefined (not initialized), attempting to initialize");
-    initChainStateStore(dispatch);
-  }
-  console.log("chainstate", web3State, sChainState);
+  await retrieveChainState();
+  
 };
 
 
@@ -173,10 +169,39 @@ export const addUser = async (
   });
 };
 
-export const initChainStateStore = async (dispath:Dispatch) => {
-  //getWeb3
-  console.log("Action.initChainStateStore");
+export const retrieveChainState = async () => {
+  console.log("Action.retrieveChainState()");
+  const {dispatch} = React.useContext(Store);
+  const {web3State, sChainState} = React.useContext(ChainStateStore);
+
+  //if (_.isUndefined(web3State)){
+    //console.log("web3 undefined, attepting to initialize");
+    initWeb3(dispatch, web3State);
+  //}
+
+  //if (_.isUndefined(sChainState)){
+    //console.log("sChain undefined, attepting to initialize");
+    initSChain(dispatch);
+  //} 
+
+  console.log("chainstate", web3State, sChainState);
+}
+
+
+export const initWeb3 = async (dispatch:Dispatch, web3State:IWeb3State) => {
+  console.log("Action.initWeb3()");
+
   let web3 = await metaMaskWeb3();
+    if (!_.isUndefined(web3)){
+      web3State.web3 = web3;
+      web3State.accounts = await web3.eth.getAccounts();
+    }
+}
+
+
+export const initSChain = async (dispatch:Dispatch) => {
+  console.log("Action.initSChain()");
+
 }
 
 /*
