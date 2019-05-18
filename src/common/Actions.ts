@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   IProvider,
   IUser,
@@ -10,11 +10,8 @@ import { contractInstanceFromState } from "./../utils/sideChainUtils";
 import _ from "lodash";
 import { toast } from "react-toastify";
 import { ChainStateStore, Store } from "./Store";
-import Web3 from 'web3';
-import getWeb3, {metaMaskWeb3} from '../utils/getWeb3';
-
-
-
+import Web3 from "web3";
+import getWeb3, { metaMaskWeb3 } from "../utils/getWeb3";
 
 export const FETCH_PROVIDERS_DATA = "FETCH_PROVIDERS_DATA";
 export const ADD_PROVIDER = "ADD_PROVIDER";
@@ -33,9 +30,7 @@ export const notifyError = (msg: string) => {
 export const fetchNone = async () => {
   console.log("Action.fetchAny()");
   await retrieveChainState();
-  
 };
-
 
 export const fetchSkills = async (
   web3State: IWeb3State,
@@ -171,38 +166,48 @@ export const addUser = async (
 
 export const retrieveChainState = async () => {
   console.log("Action.retrieveChainState()");
-  const {dispatch} = React.useContext(Store);
-  const {web3State, sChainState} = React.useContext(ChainStateStore);
+  const { dispatch } = React.useContext(Store);
+  const { web3State, sChainState } = React.useContext(ChainStateStore);
 
   //if (_.isUndefined(web3State)){
-    //console.log("web3 undefined, attepting to initialize");
-    initWeb3(dispatch, web3State);
+  //console.log("web3 undefined, attepting to initialize");
+  initWeb3(dispatch, web3State);
   //}
 
   //if (_.isUndefined(sChainState)){
-    //console.log("sChain undefined, attepting to initialize");
-    initSChain(dispatch);
-  //} 
+  //console.log("sChain undefined, attepting to initialize");
+  initSChain(dispatch);
+  //}
 
   console.log("chainstate", web3State, sChainState);
-}
+};
 
-
-export const initWeb3 = async (dispatch:Dispatch, web3State:IWeb3State) => {
+export const initWeb3 = async (dispatch: Dispatch, web3State: IWeb3State) => {
   console.log("Action.initWeb3()");
 
   let web3 = await metaMaskWeb3();
-    if (!_.isUndefined(web3)){
-      web3State.web3 = web3;
-      web3State.accounts = await web3.eth.getAccounts();
-    }
-}
+  if (!_.isUndefined(web3) && web3) {
+    web3State.web3 = web3;
+    web3State.accounts = await web3.eth.getAccounts();
+  } else {
+    console.error("initWeb3 - error getting web 3 (not defined)");
+  }
+};
 
+/*export const loadWeb3AcctInfo = async (web3State: IWeb3State) => {
+  console.log("Action.loadWeb3AccountInfo()");
+  if (web3State.web3 && web3State.accounts.length) {
+    let balance = await web3State.web3.eth.getBalance(web3State.accounts);  
+  } else {
+    console.error(
+      "loadWeb3AccountInfo() - web3 or web3 accounts are not available"
+    );
+  }
+};*/
 
-export const initSChain = async (dispatch:Dispatch) => {
+export const initSChain = async (dispatch: Dispatch) => {
   console.log("Action.initSChain()");
-
-}
+};
 
 /*
 
