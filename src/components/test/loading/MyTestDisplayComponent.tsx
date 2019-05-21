@@ -5,6 +5,8 @@ import MyTestDisplayChild from "../MyTestDisplayChild";
 import { Store, ChainStateStore } from "../../../common/Store";
 import { fetchNone } from "../../../common/Actions";
 
+const ETH_CONTRACT = '';
+
 
 
 function MyTestDisplayComponent(props: any ) {

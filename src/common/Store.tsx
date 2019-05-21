@@ -5,7 +5,9 @@ import {
   FETCH_PROVIDERS_DATA,
   SET_USER,
   ALL_USERS,
-  SKILLS_LIST
+  SKILLS_LIST,
+  SET_WEB3,
+  SET_SCHAIN
 } from "./Actions";
 import { metaMaskWeb3 } from "../utils/getWeb3";
 
@@ -31,7 +33,7 @@ const initialState: IAppState = {
   }
 };
 
-const initialChainState = {
+const initialChainState:IChainState = {
     web3State : {
       web3: {},
       accounts: [],
@@ -69,6 +71,13 @@ function reducer(state: IAppState, action: IAction | any): IAppState {
       return state;
   }
 }
+
+/*
+case SET_WEB3:
+return { ...state, providerState: { providers: action.payload } };
+case SET_SCHAIN:
+return { ...state, providerState: { providers: action.payload } };
+*/
 
 export function StoreProvider(props: any): JSX.Element {
   const [state, dispatch] = React.useReducer(reducer, initialState);

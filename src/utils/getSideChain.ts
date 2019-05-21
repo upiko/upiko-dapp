@@ -9,7 +9,7 @@ import {
   LOOM_EXTDEV_READ_URL,
   LOOM_EXTDEV_WRITE_URL
 } from "./../config";
-import { config } from "dotenv";
+
 
 export const getSChainClient = async (
   contractJson: any
