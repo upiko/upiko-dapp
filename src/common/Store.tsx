@@ -1,5 +1,11 @@
 import React from "react";
-import {IAction, IAppState, IChainState, IWeb3State, ISideChainState } from "./Interfaces";
+import {
+  IAction,
+  IAppState,
+  IChainState,
+  IWeb3State,
+  ISideChainState
+} from "./Interfaces";
 import {
   ADD_PROVIDER,
   FETCH_PROVIDERS_DATA,
@@ -11,12 +17,19 @@ import {
 } from "./Actions";
 import { metaMaskWeb3 } from "../utils/getWeb3";
 
-
-
 //ETH CONTRACT
 //SCHAIN CONTRACT
 
 const initialState: IAppState = {
+    web3State: {
+      web3: {},
+      accounts: [],
+      contract: {}
+    },
+    sChainState: {
+      sChainClient: {},
+      sChainContract: {}
+    },
   providerState: {
     providers: []
   },
@@ -27,31 +40,40 @@ const initialState: IAppState = {
   },
   usersState: {
     users: []
-  }, 
+  },
   skillsList: {
     skills: []
   }
 };
 
-const initialChainState:IChainState = {
-    web3State : {
-      web3: {},
-      accounts: [],
-      contract: {}
-    },
-    sChainState: {
-      sChainClient: {},
-      sChainContract: {}
-    }
-  };
-  
+const initialChainState: IChainState = {
+  web3State: {
+    web3: {},
+    accounts: [],
+    contract: {}
+  },
+  sChainState: {
+    sChainClient: {},
+    sChainContract: {}
+  }
+};
 
 export const Store = React.createContext<IAppState | any>(initialState);
-export const ChainStateStore = React.createContext<IChainState | any> (initialChainState);
-
+export const ChainStateStore = React.createContext<IChainState | any>(
+  initialChainState
+);
 
 function reducer(state: IAppState, action: IAction | any): IAppState {
   switch (action.type) {
+    case SET_WEB3:
+      return {
+        ...state,
+        web3State: {
+          web3: action.payload.web3,
+          accounts: action.payload.accounts,
+          contract: action.payload.contract
+        }
+      };
     case FETCH_PROVIDERS_DATA:
       return { ...state, providerState: { providers: action.payload } };
     case SKILLS_LIST:
@@ -73,10 +95,7 @@ function reducer(state: IAppState, action: IAction | any): IAppState {
 }
 
 /*
-case SET_WEB3:
-return { ...state, providerState: { providers: action.payload } };
-case SET_SCHAIN:
-return { ...state, providerState: { providers: action.payload } };
+
 */
 
 export function StoreProvider(props: any): JSX.Element {
@@ -88,16 +107,15 @@ export function StoreProvider(props: any): JSX.Element {
   );
 }
 
-  //React.useWeb3  or initialize now
-  //React.useSChain
-export function ChainStateStoreProvider(props:any): JSX.Element {
-
-  const web3State =  initialChainState.web3State;
+//React.useWeb3  or initialize now
+//React.useSChain
+export function ChainStateStoreProvider(props: any): JSX.Element {
+  const web3State = initialChainState.web3State;
   const sChainState = initialChainState.sChainState;
 
-  return ( 
-    <ChainStateStore.Provider value={{web3State, sChainState}}>
-       {props.children}
+  return (
+    <ChainStateStore.Provider value={{ web3State, sChainState }}>
+      {props.children}
     </ChainStateStore.Provider>
   );
 }

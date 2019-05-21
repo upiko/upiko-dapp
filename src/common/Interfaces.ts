@@ -7,6 +7,8 @@
 export type Dispatch = React.Dispatch<IAction>;
 
 export interface IAppState {
+  web3State: IWeb3State;
+  sChainState: ISideChainState;
   providerState: IProviderState;
   userState: IUser;
   usersState: IUsers;
