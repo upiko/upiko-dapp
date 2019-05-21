@@ -4,7 +4,8 @@ import {
   IUser,
   IWeb3State,
   ISideChainState,
-  Dispatch
+  Dispatch,
+  IChainState
 } from "./Interfaces";
 import { contractInstanceFromState } from "./../utils/sideChainUtils";
 import _ from "lodash";
@@ -14,7 +15,7 @@ import Web3 from "web3";
 import getWeb3, { metaMaskWeb3 } from "../utils/getWeb3";
 import { getSChainClient } from "../utils/getSideChain";
 
-const SCHAIN_CONTRACT_JSON = './../contracts/UpikoApp.json';
+const SCHAIN_CONTRACT_JSON = "./../contracts/UpikoApp.json";
 
 export const FETCH_PROVIDERS_DATA = "FETCH_PROVIDERS_DATA";
 export const ADD_PROVIDER = "ADD_PROVIDER";
@@ -24,8 +25,6 @@ export const SKILLS_LIST = "SKILLS_LIST";
 export const SET_WEB3 = "SET_WEB3";
 export const SET_SCHAIN = "SET_SCHAIN";
 
-
-
 export const notify = (msg: string, success?: boolean) => {
   !success ? toast(msg) : toast.success(msg, { autoClose: false });
 };
@@ -34,9 +33,13 @@ export const notifyError = (msg: string) => {
   toast.error(msg, { autoClose: false });
 };
 
-export const fetchNone = async () => {
+export const fetchNone = async (
+  web3State: IWeb3State,
+  sChainState: ISideChainState,
+  dispatch: Dispatch
+) => {
   console.log("Action.fetchAny()");
-  await retrieveChainState();
+  await retrieveChainState(web3State, sChainState, dispatch);
 };
 
 export const fetchSkills = async (
@@ -171,31 +174,36 @@ export const addUser = async (
   });
 };
 
-export const retrieveChainState = async () => {
+export const retrieveChainState = async (
+  web3State: IWeb3State,
+  sChainState: ISideChainState,
+  dispatch: Dispatch
+) => {
   console.log("Action.retrieveChainState()");
-  const { dispatch } = React.useContext(Store);
-  const { web3State, sChainState } = React.useContext(ChainStateStore);
+  //const { dispatch } = React.useContext(Store);
+  //const { web3State, sChainState } = React.useContext(ChainStateStore);
 
   //if (_.isUndefined(web3State)){
   //console.log("web3 undefined, attepting to initialize");
-  await initWeb3(dispatch, web3State);
+  const w3state = await initWeb3(dispatch, web3State);
+
+  dispatch({
+    type: SET_WEB3,
+    payload: w3state
+  });
+
   //}
 
   //if (_.isUndefined(sChainState)){
   //console.log("sChain undefined, attepting to initialize");
-  await initSChain(dispatch, sChainState);
+  await initSChain(sChainState, dispatch);
   //}
 
-  //either a reducer (dispatch call) or directly use context
-  //or maybe just use state?
-  //await fetchUsers(web3State, sChainState, dispatch);
-
-  console.log("chainstate", web3State, sChainState);
+  //console.log("chainstate", web3State, sChainState);
 };
 
-
 // could have a force flag, so that if not force, do not re-init web3
-export const initWeb3 = async (dispatch: Dispatch, web3State: IWeb3State) => {
+export const initWeb3 = async (dispatch: Dispatch, web3State: IWeb3State):Promise<IWeb3State|any> => {
   console.log("Action.initWeb3()");
 
   //TODO: if web3 is undefined, web3 = {}
@@ -204,8 +212,11 @@ export const initWeb3 = async (dispatch: Dispatch, web3State: IWeb3State) => {
   if (!_.isUndefined(web3) && web3) {
     web3State.web3 = web3;
     web3State.accounts = await web3.eth.getAccounts();
+
+    return web3State;
   } else {
     console.error("initWeb3 - error getting web 3 (not defined)");
+    return web3State;
   }
 };
 
@@ -220,13 +231,14 @@ export const initWeb3 = async (dispatch: Dispatch, web3State: IWeb3State) => {
   }
 };*/
 
-export const initSChain = async (dispatch: Dispatch, sChainState: ISideChainState) => {
+export const initSChain = async (
+  sChainState: ISideChainState,
+  dispatch: Dispatch
+) => {
   console.log("Action.initSChain()");
   const contractJSON = SCHAIN_CONTRACT_JSON;
   const sChainClient = await getSChainClient(contractJSON);
 
   sChainState.sChainClient = sChainClient;
   sChainClient.sChainContract = contractJSON;
-
 };
-

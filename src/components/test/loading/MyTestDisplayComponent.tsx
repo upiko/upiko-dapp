@@ -3,7 +3,8 @@ import { withWeb3Contract } from "../../chainstate/Web3StateWrap";
 import { withSChain } from "../../chainstate/SideChainWrap";
 import MyTestDisplayChild from "../MyTestDisplayChild";
 import { Store, ChainStateStore } from "../../../common/Store";
-import { fetchNone } from "../../../common/Actions";
+import { fetchNone, retrieveChainState } from "../../../common/Actions";
+import { async } from "q";
 
 const ETH_CONTRACT = '';
 
@@ -15,12 +16,21 @@ function MyTestDisplayComponent(props: any ) {
 
   console.log("MyTestDisplayComponent", web3State, sChainState);
 
-  const load = async() => {
+  React.useEffect(() => {
+    const callForFetch = async() => {
+      await retrieveChainState(web3State, sChainState, dispatch);
+
+    }
+    callForFetch();
+
+  }, [web3State])
+
+  /*const load = async() => {
     console.log("load()");
     fetchNone();
   }
 
-  load();
+  load();*/
  
   return (
     <div className="container mydisplay-container">
