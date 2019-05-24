@@ -10,7 +10,7 @@ import {
 import { contractInstanceFromState } from "./../utils/sideChainUtils";
 import _ from "lodash";
 import { toast } from "react-toastify";
-import { ChainStateStore, Store } from "./Store";
+import { Store } from "./Store";
 import Web3 from "web3";
 import getWeb3, { metaMaskWeb3 } from "../utils/getWeb3";
 import { getSChainClient } from "../utils/getSideChain";
@@ -209,6 +209,8 @@ export const initWeb3 = async (dispatch: Dispatch, web3State: IWeb3State):Promis
   //TODO: if web3 is undefined, web3 = {}
 
   let web3 = await metaMaskWeb3();
+  
+  console.log("initWeb3(), web3:", web3);
   if (!_.isUndefined(web3) && web3) {
     web3State.web3 = web3;
     web3State.accounts = await web3.eth.getAccounts();

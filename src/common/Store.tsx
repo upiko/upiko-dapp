@@ -21,15 +21,15 @@ import { metaMaskWeb3 } from "../utils/getWeb3";
 //SCHAIN CONTRACT
 
 const initialState: IAppState = {
-    web3State: {
-      web3: {},
-      accounts: [],
-      contract: {}
-    },
-    sChainState: {
-      sChainClient: {},
-      sChainContract: {}
-    },
+  web3State: {
+    web3: {},
+    accounts: [],
+    contract: {}
+  },
+  sChainState: {
+    sChainClient: {},
+    sChainContract: {}
+  },
   providerState: {
     providers: []
   },
@@ -46,7 +46,7 @@ const initialState: IAppState = {
   }
 };
 
-const initialChainState: IChainState = {
+/*const initialChainState: IChainState = {
   web3State: {
     web3: {},
     accounts: [],
@@ -56,12 +56,12 @@ const initialChainState: IChainState = {
     sChainClient: {},
     sChainContract: {}
   }
-};
+};*/
 
 export const Store = React.createContext<IAppState | any>(initialState);
-export const ChainStateStore = React.createContext<IChainState | any>(
+/*export const ChainStateStore = React.createContext<IChainState | any>(
   initialChainState
-);
+);*/
 
 function reducer(state: IAppState, action: IAction | any): IAppState {
   switch (action.type) {
@@ -109,7 +109,7 @@ export function StoreProvider(props: any): JSX.Element {
 
 //React.useWeb3  or initialize now
 //React.useSChain
-export function ChainStateStoreProvider(props: any): JSX.Element {
+/*export function ChainStateStoreProvider(props: any): JSX.Element {
   const web3State = initialChainState.web3State;
   const sChainState = initialChainState.sChainState;
 
@@ -118,4 +118,4 @@ export function ChainStateStoreProvider(props: any): JSX.Element {
       {props.children}
     </ChainStateStore.Provider>
   );
-}
+}*/

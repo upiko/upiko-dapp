@@ -1,11 +1,11 @@
 import React from 'react'
-import { Store, ChainStateStore } from '../../common/Store';
+import { Store } from '../../common/Store';
 
 
 
 export default function MyTestDisplayChild(props:any) {
-  const { state, dispatch } = React.useContext(Store);
-  const { web3State, sChainState} = React.useContext(ChainStateStore);
+  const { state, dispatch, web3State, sChainState } = React.useContext(Store);
+  //const { } = React.useContext(ChainStateStore);
 
 
   //console.log("MyTestDisplay Child()", web3State, sChainState);

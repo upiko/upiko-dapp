@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
-import { StoreProvider, Store, ChainStateStoreProvider } from "./common/Store";
+import { StoreProvider} from "./common/Store";
 import { Router, RouteComponentProps } from "@reach/router";
 import "antd/dist/antd.css";
 import './bootstrap.min.css';
@@ -23,7 +23,6 @@ const RouterPage = (props: { pageComponent: JSX.Element } & RouteComponentProps)
 
 ReactDOM.render(
   <StoreProvider>
-    <ChainStateStoreProvider>
       <Router>
         <App path="/">        
             <RouterPage pageComponent={<Main />} path="/" />
@@ -35,7 +34,6 @@ ReactDOM.render(
             <RouterPage pageComponent={<Skills />} path="/skills" />
         </App>
       </Router>
-    </ChainStateStoreProvider>
   </StoreProvider>,
   document.getElementById("root")
 );
