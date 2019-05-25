@@ -13,7 +13,8 @@ import {
   ALL_USERS,
   SKILLS_LIST,
   SET_WEB3,
-  SET_SCHAIN
+  SET_SCHAIN,
+  SET_ACCOUNT
 } from "./Actions";
 import { metaMaskWeb3 } from "../utils/getWeb3";
 
@@ -65,13 +66,18 @@ export const Store = React.createContext<IAppState | any>(initialState);
 
 function reducer(state: IAppState, action: IAction | any): IAppState {
   switch (action.type) {
+    case SET_ACCOUNT:
+      return {
+        ...state,
+        web3State:{...state.web3State, account: action.payload}
+      }
     case SET_WEB3:
       return {
         ...state,
         web3State: {
           web3: action.payload.web3,
           accounts: action.payload.accounts,
-          contract: action.payload.contract
+          contract: action.payload.contract,
         }
       };
     case FETCH_PROVIDERS_DATA:

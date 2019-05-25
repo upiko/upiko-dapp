@@ -3,6 +3,7 @@ import { Card } from 'antd';
 import { Store } from '../../../common/Store';
 import { fetchUser, retrieveChainState } from '../../../common/Actions';
 import useChainState from '../../chainstate/useChainState';
+import useAccountWatch from '../../chainstate/useAccountWatch';
 
 
 export default function ShowUserAccount(props:any) {
@@ -25,6 +26,8 @@ export default function ShowUserAccount(props:any) {
     setethAddr(web3State.accounts[0]);
   }, [web3State.accounts[0]]);
 
+
+  useAccountWatch(web3State, dispatch);
 
 
   return (

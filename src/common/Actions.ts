@@ -21,6 +21,7 @@ export const ALL_USERS = "ALL_USERS";
 export const SKILLS_LIST = "SKILLS_LIST";
 export const SET_WEB3 = "SET_WEB3";
 export const SET_SCHAIN = "SET_SCHAIN";
+export const SET_ACCOUNT = "SET_ACCOUNT";
 
 
 export const notify = (msg: string, success?: boolean) => {
@@ -51,7 +52,7 @@ export const fetchSkills = async (
   let instance = await contractInstanceFromState(sChainState);
   let skillsCount = await instance.methods.numberOfSkills().call();
 
-  console.log("skillsCount:", skillsCount);
+  //console.log("skillsCount:", skillsCount);
 
   let skills = [];
   for (let i = 0; i < skillsCount; i++) {
@@ -188,10 +189,9 @@ export const retrieveChainState = async (
   console.log("Action.retrieveChainState()");
   
   await initWeb3(dispatch, web3State);
-
   await initSChain(sChainState, dispatch);
   
-  console.log("chainstate", web3State, sChainState);
+  //console.log("chainstate", web3State, sChainState);
 };
 
 // could have a force flag, so that if not force, do not re-init web3
@@ -202,7 +202,6 @@ export const initWeb3 = async (
   console.log("Action.initWeb3()");
 
   //TODO: if web3 is undefined, web3 = {}
-
   let web3 = await metaMaskWeb3();
 
   console.log("initWeb3(), web3:", web3);

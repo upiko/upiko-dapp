@@ -1,42 +1,29 @@
 import React from 'react';
 import { WEB3_ACCOUNT_CHECK_INTERVAL } from './../../config';
-import { initWeb3, retrieveChainState } from '../../common/Actions';
+import { initWeb3, SET_ACCOUNT } from '../../common/Actions';
 
 export default function useAccountWatch(web3State, dispatch){
-  const [account, setAccount] = React.useState('');
   const [intervalId, setIntervalId] = React.useState('');
-  const [web3StateVal, setWeb3StateVal] = React.useState({});
-
-
-  React.useEffect(() => {
-   
-    const loadCurrentUser = async() => {
-      await initWeb3(dispatch, web3State);
-      await getAccountInfo(web3State);
-    }
-    loadCurrentUser();
-  }, []);
-
+  
 
   React.useEffect(() => {
-
     const startWatchTimer = async() => {
       console.log("starting useAccountWatch() TIMER, with interval:", WEB3_ACCOUNT_CHECK_INTERVAL);
-      let intId = setInterval(checkWeb3Account(), WEB3_ACCOUNT_CHECK_INTERVAL);
+      let intId = setInterval(checkWeb3Account, WEB3_ACCOUNT_CHECK_INTERVAL);
       setIntervalId(intId);
-      console.log("intervalId")
+      console.log("intervalId", intId);
     }
     
     startWatchTimer();
 
     return function cleanup() {
-      console.log("cleaning up useAccountWatch() TIMER");
+      clearInterval(intervalId)
+      console.log("cleaning up useAccountWatch() TIMER, id:", intervalId);
     };
-    
   }, []);
 
 
-  const getAccountInfo = async (web3State) => {
+ /* const getAccountInfo = async (web3State) => {
     const { web3 } = web3State;
     if (web3) {
       const accounts = await web3.eth.getAccounts();
@@ -47,15 +34,25 @@ export default function useAccountWatch(web3State, dispatch){
         console.error("no accounts are available to use (accounts.length < 1)");
       }  
     }
-  };
+  };*/
+
 
   const checkWeb3Account = async () => {
+    //console.log("checkWeb3Account");
     await initWeb3(dispatch, web3State);
+    //console.log("chainstate in checkWeb3", web3State);
     let web3 = web3State.web3;
+    let account = web3State.accounts[0];
     let accounts = await web3.eth.getAccounts();
+    //console.log("current account=", account);
+    //console.log("pulled account=", accounts[0])
     if (accounts[0] !== account){
       console.log("web3 account changed");
-      
+      //notify("account changed")
+      dispatch({
+        type: SET_ACCOUNT,
+        payload: accounts[0]
+      })
     }    
   };
 }

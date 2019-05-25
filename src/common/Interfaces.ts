@@ -25,6 +25,7 @@ export interface IWeb3State {
   web3: any;
   accounts: any;
   contract: any;
+  account?: any;
 }
 
 export interface ISideChainState {

@@ -49,8 +49,8 @@ export default class LoomClient {
 
   async _createContractInstance() {
     const networkId = await this._getCurrentNetwork();
-    console.log("loading contract, with:", networkId);
-    console.log("curren contract is:", this.contractJson);
+    //console.log("loading contract, with:", networkId);
+    //console.log("current contract is:", this.contractJson);
     this.currentNetwork = this.contractJson.networks[networkId];
 
     if (!this.currentNetwork) {
