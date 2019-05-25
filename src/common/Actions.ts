@@ -4,18 +4,15 @@ import {
   IUser,
   IWeb3State,
   ISideChainState,
-  Dispatch,
-  IChainState
+  Dispatch
 } from "./Interfaces";
 import { contractInstanceFromState } from "./../utils/sideChainUtils";
 import _ from "lodash";
 import { toast } from "react-toastify";
-import { Store } from "./Store";
-import Web3 from "web3";
-import getWeb3, { metaMaskWeb3 } from "../utils/getWeb3";
+import { metaMaskWeb3 } from "../utils/getWeb3";
 import { getSChainClient } from "../utils/getSideChain";
 
-const SCHAIN_CONTRACT_JSON = "./../contracts/UpikoApp.json";
+import SCHAIN_CONTRACT_JSON from  "./../contracts/UpikoApp.json";
 
 export const FETCH_PROVIDERS_DATA = "FETCH_PROVIDERS_DATA";
 export const ADD_PROVIDER = "ADD_PROVIDER";
@@ -196,20 +193,28 @@ export const retrieveChainState = async (
 
   //if (_.isUndefined(sChainState)){
   //console.log("sChain undefined, attepting to initialize");
-  await initSChain(sChainState, dispatch);
+  const scState = await initSChain(sChainState, dispatch);
+  dispatch({
+    type: SET_SCHAIN,
+    payload: scState
+  });
+
   //}
 
-  //console.log("chainstate", web3State, sChainState);
+  console.log("chainstate", web3State, sChainState);
 };
 
 // could have a force flag, so that if not force, do not re-init web3
-export const initWeb3 = async (dispatch: Dispatch, web3State: IWeb3State):Promise<IWeb3State|any> => {
+export const initWeb3 = async (
+  dispatch: Dispatch,
+  web3State: IWeb3State
+): Promise<IWeb3State | any> => {
   console.log("Action.initWeb3()");
 
   //TODO: if web3 is undefined, web3 = {}
 
   let web3 = await metaMaskWeb3();
-  
+
   console.log("initWeb3(), web3:", web3);
   if (!_.isUndefined(web3) && web3) {
     web3State.web3 = web3;
@@ -236,11 +241,13 @@ export const initWeb3 = async (dispatch: Dispatch, web3State: IWeb3State):Promis
 export const initSChain = async (
   sChainState: ISideChainState,
   dispatch: Dispatch
-) => {
+): Promise<ISideChainState | any> => {
+
   console.log("Action.initSChain()");
   const contractJSON = SCHAIN_CONTRACT_JSON;
   const sChainClient = await getSChainClient(contractJSON);
 
   sChainState.sChainClient = sChainClient;
   sChainClient.sChainContract = contractJSON;
+  return sChainState;
 };

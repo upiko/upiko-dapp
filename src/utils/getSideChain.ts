@@ -21,7 +21,7 @@ export const getSChainClient = async (
     let networkId = LOOM_DEV_NETWORK_ID;
 
     if (LOOM_NETWORK === "EXTDEV") {
-      writeUrl = LOOM_EXTDEV_READ_URL;
+      writeUrl = LOOM_EXTDEV_WRITE_URL;
       readUrl = LOOM_EXTDEV_READ_URL;
       networkId = LOOM_EXTDEV_NETWORK_ID;
     }

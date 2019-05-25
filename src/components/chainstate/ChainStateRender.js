@@ -9,7 +9,7 @@ import UpikoApp from './../../contracts/UpikoApp.json';
 /**
 |--------------------------------------------------
 | Ensure that child componenets (props.children)
-| use appropriate "withXXXXXXX" injectiions on export
+| use appropriate "withXXXXXXX" injections on export
 | from Web3Wrap, Web3StateWrap or SideChainWrap
 |--------------------------------------------------
 */

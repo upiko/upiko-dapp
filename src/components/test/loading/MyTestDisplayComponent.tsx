@@ -1,7 +1,7 @@
 import React from "react";
 import MyTestDisplayChild from "../MyTestDisplayChild";
 import { Store} from "../../../common/Store";
-import { retrieveChainState } from "../../../common/Actions";
+import { retrieveChainState, fetchUsers } from "../../../common/Actions";
 
 
 const ETH_CONTRACT = '';
@@ -18,6 +18,8 @@ function MyTestDisplayComponent(props: any ) {
   React.useEffect(() => {
     const callForFetch = async() => {
       await retrieveChainState(web3State, sChainState, dispatch);
+
+      await fetchUsers(web3State, sChainState, dispatch);
     }
     callForFetch();
   }, [])
