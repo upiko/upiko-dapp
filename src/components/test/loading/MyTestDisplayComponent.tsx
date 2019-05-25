@@ -24,12 +24,8 @@ function MyTestDisplayComponent(props: any ) {
     callForFetch();
   }, [])
 
-  /*const load = async() => {
-    console.log("load()");
-    fetchNone();
-  }
 
-  load();*/
+   //console.log("MyDisplayComponent, pre-render, state=", state.usersState);
  
   return (
     <div className="container mydisplay-container">

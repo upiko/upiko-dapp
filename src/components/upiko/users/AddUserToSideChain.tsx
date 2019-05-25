@@ -3,13 +3,22 @@ import { Input, Button, Card } from "antd";
 import { Store } from "../../../common/Store";
 import { withWeb3Contract } from "../../chainstate/Web3StateWrap";
 import { withSChain } from "../../chainstate/SideChainWrap";
-import { addUser } from "../../../common/Actions";
+import { addUser, retrieveChainState } from "../../../common/Actions";
 import { IProvider, IUser } from "../../../common/Interfaces";
 
-function AddUserToSideChain(props: any) {
+export default function AddUserToSideChain(props: any) {
   const { state, dispatch } = React.useContext(Store);
-  const { web3State, sChainState } = props;
+  const { web3State, sChainState } = state;
   const [name, setName] = React.useState("");
+
+  React.useEffect(() => {
+    const load = async() => {
+      await retrieveChainState(web3State, sChainState, dispatch);
+    }
+    load();
+  }, []);
+
+
   return (
     <div style={{ background: '#ECECEC', padding: '30px' }}>
       <Card title="Add User" bordered={false} >
@@ -46,4 +55,3 @@ function AddUserToSideChain(props: any) {
   );
 }
 
-export default withWeb3Contract(withSChain(AddUserToSideChain));

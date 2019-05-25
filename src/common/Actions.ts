@@ -22,6 +22,7 @@ export const SKILLS_LIST = "SKILLS_LIST";
 export const SET_WEB3 = "SET_WEB3";
 export const SET_SCHAIN = "SET_SCHAIN";
 
+
 export const notify = (msg: string, success?: boolean) => {
   !success ? toast(msg) : toast.success(msg, { autoClose: false });
 };
@@ -29,6 +30,7 @@ export const notify = (msg: string, success?: boolean) => {
 export const notifyError = (msg: string) => {
   toast.error(msg, { autoClose: false });
 };
+
 
 export const fetchNone = async (
   web3State: IWeb3State,
@@ -38,6 +40,7 @@ export const fetchNone = async (
   console.log("Action.fetchAny()");
   await retrieveChainState(web3State, sChainState, dispatch);
 };
+
 
 export const fetchSkills = async (
   web3State: IWeb3State,
@@ -61,6 +64,7 @@ export const fetchSkills = async (
   });
 };
 
+
 export const fetchUsers = async (
   web3State: IWeb3State,
   sChainState: ISideChainState,
@@ -79,6 +83,7 @@ export const fetchUsers = async (
     payload: users
   });
 };
+
 
 export const fetchUser = async (
   ethAddr: string,
@@ -102,6 +107,7 @@ export const fetchUser = async (
     payload: inflatedUser
   });
 };
+
 
 export const fetchProviders = async (
   web3State: IWeb3State,
@@ -129,6 +135,7 @@ export const fetchProviders = async (
   });
 };
 
+
 export const addProvider = async (
   provider: IProvider,
   web3State: IWeb3State,
@@ -151,6 +158,7 @@ export const addProvider = async (
   });
 };
 
+
 export const addUser = async (
   user: IUser,
   web3State: IWeb3State,
@@ -171,44 +179,26 @@ export const addUser = async (
   });
 };
 
+
 export const retrieveChainState = async (
   web3State: IWeb3State,
   sChainState: ISideChainState,
   dispatch: Dispatch
 ) => {
   console.log("Action.retrieveChainState()");
-  //const { dispatch } = React.useContext(Store);
-  //const { web3State, sChainState } = React.useContext(ChainStateStore);
+  
+  await initWeb3(dispatch, web3State);
 
-  //if (_.isUndefined(web3State)){
-  //console.log("web3 undefined, attepting to initialize");
-  const w3state = await initWeb3(dispatch, web3State);
-
-  dispatch({
-    type: SET_WEB3,
-    payload: w3state
-  });
-
-  //}
-
-  //if (_.isUndefined(sChainState)){
-  //console.log("sChain undefined, attepting to initialize");
-  const scState = await initSChain(sChainState, dispatch);
-  dispatch({
-    type: SET_SCHAIN,
-    payload: scState
-  });
-
-  //}
-
+  await initSChain(sChainState, dispatch);
+  
   console.log("chainstate", web3State, sChainState);
 };
 
 // could have a force flag, so that if not force, do not re-init web3
 export const initWeb3 = async (
-  dispatch: Dispatch,
+  dispatch: any,
   web3State: IWeb3State
-): Promise<IWeb3State | any> => {
+) => {
   console.log("Action.initWeb3()");
 
   //TODO: if web3 is undefined, web3 = {}
@@ -220,10 +210,13 @@ export const initWeb3 = async (
     web3State.web3 = web3;
     web3State.accounts = await web3.eth.getAccounts();
 
-    return web3State;
+    dispatch({
+      type: SET_WEB3,
+      payload: web3State
+    });
+
   } else {
     console.error("initWeb3 - error getting web 3 (not defined)");
-    return web3State;
   }
 };
 
@@ -240,8 +233,8 @@ export const initWeb3 = async (
 
 export const initSChain = async (
   sChainState: ISideChainState,
-  dispatch: Dispatch
-): Promise<ISideChainState | any> => {
+  dispatch: any
+) => {
 
   console.log("Action.initSChain()");
   const contractJSON = SCHAIN_CONTRACT_JSON;
@@ -249,5 +242,10 @@ export const initSChain = async (
 
   sChainState.sChainClient = sChainClient;
   sChainClient.sChainContract = contractJSON;
-  return sChainState;
+
+  dispatch({
+    type: SET_SCHAIN,
+    payload: sChainState
+  });
+
 };
