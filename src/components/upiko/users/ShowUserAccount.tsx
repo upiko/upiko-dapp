@@ -2,6 +2,7 @@ import React from 'react';
 import { Card } from 'antd';
 import { Store } from '../../../common/Store';
 import { fetchUser, retrieveChainState } from '../../../common/Actions';
+import useChainState from '../../chainstate/useChainState';
 
 
 export default function ShowUserAccount(props:any) {
@@ -11,14 +12,19 @@ export default function ShowUserAccount(props:any) {
   const {name, isProvider} = state.userState;
 
  
-  React.useEffect(() => {
+ React.useEffect(() => {
     const load = async() => {
       await retrieveChainState(web3State, sChainState, dispatch);
-      setethAddr(web3State.accounts[0]);
       await fetchUser(web3State.accounts[0], web3State, sChainState, dispatch);
   }
     load();
   }, []);
+
+
+  React.useEffect(() => {
+    setethAddr(web3State.accounts[0]);
+  }, [web3State.accounts[0]]);
+
 
 
   return (

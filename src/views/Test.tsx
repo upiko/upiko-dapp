@@ -1,5 +1,5 @@
 import React from 'react'
-import MyTestDisplayComponent from '../components/test/loading/MyTestDisplayComponent';
+import MyTestDisplayComponent from '../components/test/MyTestDisplayComponent';
 
 
 
