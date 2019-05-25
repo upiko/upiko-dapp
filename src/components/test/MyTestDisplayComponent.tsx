@@ -13,7 +13,7 @@ function MyTestDisplayComponent(props: any ) {
   const {web3State, sChainState} = state;
 
   useChainState(web3State, sChainState, dispatch, fetchSkills);
-  useAccountWatch(web3State, dispatch);
+  useAccountWatch(web3State, dispatch, sChainState);
   
   const {skills} = state.skillsList;
 

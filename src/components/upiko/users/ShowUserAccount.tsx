@@ -10,7 +10,8 @@ export default function ShowUserAccount(props:any) {
   const { state, dispatch } = React.useContext(Store);
   const {web3State, sChainState} = state;
   const [ethAddr, setethAddr] = React.useState('');
-  const {name, isProvider} = state.userState;
+  const [name, setName] = React.useState('');
+  const [isProvider, setIsProvider] = React.useState('');
 
  
  React.useEffect(() => {
@@ -23,11 +24,14 @@ export default function ShowUserAccount(props:any) {
 
 
   React.useEffect(() => {
+    console.log("UUUUUUUUUUUseEffect, on accounts");
     setethAddr(web3State.accounts[0]);
+    setName(state.userState.name);
+    setIsProvider(state.userState.isProvider);
   }, [web3State.accounts[0]]);
 
 
-  useAccountWatch(web3State, dispatch);
+ // useAccountWatch(web3State, dispatch, sChainState);
 
 
   return (

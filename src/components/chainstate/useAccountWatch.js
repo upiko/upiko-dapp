@@ -1,8 +1,8 @@
 import React from 'react';
 import { WEB3_ACCOUNT_CHECK_INTERVAL } from './../../config';
-import { initWeb3, SET_ACCOUNT } from '../../common/Actions';
+import { initWeb3, SET_ACCOUNT, fetchUser, retrieveChainState, setAccount } from '../../common/Actions';
 
-export default function useAccountWatch(web3State, dispatch){
+export default function useAccountWatch(web3State, dispatch, sChainState){
   const [intervalId, setIntervalId] = React.useState('');
   
 
@@ -39,20 +39,19 @@ export default function useAccountWatch(web3State, dispatch){
 
   const checkWeb3Account = async () => {
     //console.log("checkWeb3Account");
-    await initWeb3(dispatch, web3State);
-    //console.log("chainstate in checkWeb3", web3State);
+    await retrieveChainState(web3State, sChainState, dispatch);
+    console.log("chainstate in checkWeb3", web3State);
     let web3 = web3State.web3;
-    let account = web3State.accounts[0];
+    let account = web3State.account;
     let accounts = await web3.eth.getAccounts();
-    //console.log("current account=", account);
-    //console.log("pulled account=", accounts[0])
+    console.log("current account=", account);
+    console.log("pulled account=", accounts[0])
     if (accounts[0] !== account){
-      console.log("web3 account changed");
+      console.log("web3 account changed to:", accounts[0]);
       //notify("account changed")
-      dispatch({
-        type: SET_ACCOUNT,
-        payload: accounts[0]
-      })
+
+      setAccount(accounts[0], dispatch);
+      await fetchUser(accounts[0], web3State, sChainState, dispatch);
     }    
   };
 }

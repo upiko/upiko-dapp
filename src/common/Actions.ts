@@ -33,6 +33,18 @@ export const notifyError = (msg: string) => {
 };
 
 
+export const setAccount = (
+  value: string,
+  dispatch: any
+) => {
+  console.log("Action.setAccount()");
+  dispatch({
+    type: SET_ACCOUNT,
+    payload: value
+  })
+}
+
+
 export const fetchNone = async (
   web3State: IWeb3State,
   sChainState: ISideChainState,
@@ -199,12 +211,12 @@ export const initWeb3 = async (
   dispatch: any,
   web3State: IWeb3State
 ) => {
-  console.log("Action.initWeb3()");
+  //console.log("Action.initWeb3()");
 
   //TODO: if web3 is undefined, web3 = {}
   let web3 = await metaMaskWeb3();
 
-  console.log("initWeb3(), web3:", web3);
+  //console.log("initWeb3(), web3:", web3);
   if (!_.isUndefined(web3) && web3) {
     web3State.web3 = web3;
     web3State.accounts = await web3.eth.getAccounts();

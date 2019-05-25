@@ -25,7 +25,8 @@ const initialState: IAppState = {
   web3State: {
     web3: {},
     accounts: [],
-    contract: {}
+    contract: {},
+    account: ''
   },
   sChainState: {
     sChainClient: {},
@@ -69,8 +70,12 @@ function reducer(state: IAppState, action: IAction | any): IAppState {
     case SET_ACCOUNT:
       return {
         ...state,
-        web3State:{...state.web3State, account: action.payload}
+        web3State:{
+          ...state.web3State, 
+          account: action.payload
+        }
       }
+     
     case SET_WEB3:
       return {
         ...state,
@@ -78,6 +83,7 @@ function reducer(state: IAppState, action: IAction | any): IAppState {
           web3: action.payload.web3,
           accounts: action.payload.accounts,
           contract: action.payload.contract,
+          account: ''
         }
       };
     case FETCH_PROVIDERS_DATA:
