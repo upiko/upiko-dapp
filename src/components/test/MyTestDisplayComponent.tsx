@@ -3,9 +3,8 @@ import MyTestDisplayChild from "./web3/MyTestDisplayChild";
 import { Store} from "../../common/Store";
 import { fetchSkills } from "../../common/Actions";
 import useChainState from "../chainstate/useChainState";
+import useAccountWatch from "../chainstate/useAccountWatch";
 
-
-const ETH_CONTRACT = '';
 
 
 
@@ -14,6 +13,7 @@ function MyTestDisplayComponent(props: any ) {
   const {web3State, sChainState} = state;
 
   useChainState(web3State, sChainState, dispatch, fetchSkills);
+  //useAccountWatch(web3State, dispatch);
   
   const {skills} = state.skillsList;
 
