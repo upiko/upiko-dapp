@@ -1,22 +1,22 @@
 import React from 'react'
-import { withWeb3Contract } from '../../chainstate/Web3StateWrap';
-import { withSChain } from '../../chainstate/SideChainWrap';
+
 import { Card, List } from 'antd';
-import { fetchSkills } from '../../../common/Actions';
+import { fetchSkills, retrieveChainState } from '../../../common/Actions';
 import { Store } from '../../../common/Store';
 
 
-function ShowAllSkills(props:any) {
+export default function ShowAllSkills(props:any) {
   const { state, dispatch } = React.useContext(Store);
-  const { web3State, sChainState } = props;
+  const { web3State, sChainState } = state;
 
-  console.log(web3State, sChainState);
+
 
   React.useEffect(() => {
-    const callFetch = async() => {
-      fetchSkills(web3State, sChainState, dispatch);
-    };
-    callFetch();   
+    const load = async() => {
+      await retrieveChainState(web3State, sChainState, dispatch);
+      await fetchSkills(web3State, sChainState, dispatch);
+    }
+    load();
   }, []);
 
 
@@ -30,5 +30,3 @@ function ShowAllSkills(props:any) {
     </div>
   )
 }
-
-export default withWeb3Contract(withSChain(ShowAllSkills));
