@@ -15,7 +15,7 @@ export const web3PayloadForContract = async(contractJson:any):Promise<IWeb3State
       deployedNetwork && deployedNetwork.address
     );
   
-    return {web3, accounts, contract:instance, account: ''};
+    return {web3Context:{}, web3, accounts, contract:instance, account: ''};
 
   } catch (error) {
     // Catch any errors for any of the above operations.

@@ -11,7 +11,7 @@ import _ from "lodash";
 import { toast } from "react-toastify";
 import { metaMaskWeb3 } from "../utils/getWeb3";
 import { getSChainClient } from "../utils/getSideChain";
-
+import { useWeb3Context } from 'web3-react';
 import SCHAIN_CONTRACT_JSON from  "./../contracts/UpikoApp.json";
 
 export const FETCH_PROVIDERS_DATA = "FETCH_PROVIDERS_DATA";
@@ -200,7 +200,7 @@ export const retrieveChainState = async (
 ) => {
   console.log("Action.retrieveChainState()");
   
-  await initWeb3(dispatch, web3State);
+  await initWeb3(web3State, dispatch);
   await initSChain(sChainState, dispatch);
   
   //console.log("chainstate", web3State, sChainState);
@@ -208,11 +208,43 @@ export const retrieveChainState = async (
 
 // could have a force flag, so that if not force, do not re-init web3
 export const initWeb3 = async (
-  dispatch: any,
-  web3State: IWeb3State
+  web3State: IWeb3State,
+  dispatch: any
 ) => {
-  //console.log("Action.initWeb3()");
+  const web3Context = web3State.web3Context;
+  console.log("Action.initWeb3()");
+  web3Context.setFirstValidConnector(['MetaMask']);
+  }
 
+
+  export const useWeb3 = async (
+    web3State: IWeb3State,
+    dispatch: any
+  ) => {
+    const web3Context = web3State.web3Context;
+    //console.log("Action.useWeb3()");
+  
+    if (!web3Context.active && !web3Context.error) {
+      // loading
+      //return ...
+      console.log("loading web3..")
+    } else if (web3Context.error) {
+      //error
+      //return ...
+      console.error("something went wrong loading web3", web3Context.error);
+    } else {
+      // success
+      //console.log("web3 loaded, account is:", web3Context.account);
+      dispatch({
+        type: SET_ACCOUNT,
+        payload: web3Context.account
+      });
+    }
+  
+
+
+
+  /*
   //TODO: if web3 is undefined, web3 = {}
   let web3 = await metaMaskWeb3();
 
@@ -228,7 +260,8 @@ export const initWeb3 = async (
 
   } else {
     console.error("initWeb3 - error getting web 3 (not defined)");
-  }
+  }*/
+  
 };
 
 /*export const loadWeb3AcctInfo = async (web3State: IWeb3State) => {

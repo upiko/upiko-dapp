@@ -23,6 +23,7 @@ import { metaMaskWeb3 } from "../utils/getWeb3";
 
 const initialState: IAppState = {
   web3State: {
+    web3Context: {},
     web3: {},
     accounts: [],
     contract: {},
@@ -80,6 +81,7 @@ function reducer(state: IAppState, action: IAction | any): IAppState {
       return {
         ...state,
         web3State: {
+          web3Context: action.payload.web3Context,
           web3: action.payload.web3,
           accounts: action.payload.accounts,
           contract: action.payload.contract,

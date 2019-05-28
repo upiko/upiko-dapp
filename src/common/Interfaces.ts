@@ -22,6 +22,7 @@ export interface IChainState{
 
 
 export interface IWeb3State {
+  web3Context: any;
   web3: any;
   accounts: any;
   contract: any;
