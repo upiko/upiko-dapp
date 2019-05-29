@@ -5,6 +5,7 @@ import { withWeb3Contract } from "../../chainstate/Web3StateWrap";
 import { withSChain } from "../../chainstate/SideChainWrap";
 import { addUser, retrieveChainState } from "../../../common/Actions";
 import { IProvider, IUser } from "../../../common/Interfaces";
+import { useWeb3Context } from 'web3-react';
 
 export default function AddUserToSideChain(props: any) {
   const { state, dispatch } = React.useContext(Store);
@@ -18,6 +19,7 @@ export default function AddUserToSideChain(props: any) {
     load();
   }, []);
 
+  const web3Context = useWeb3Context();
 
   return (
     <div style={{ background: '#ECECEC', padding: '30px' }}>
@@ -36,7 +38,15 @@ export default function AddUserToSideChain(props: any) {
           <Button
             type="dashed"
             onClick={() => {
-              const ethAddr = web3State.accounts[0];
+              //const ethAddr = web3State.accounts[0];
+              console.log("account:", web3Context.account);
+              let ethAddr = '' 
+              if (web3Context.account){
+                ethAddr = web3Context.account;
+              } else {
+                console.error("something went wrong, web3account expected, but was not available")
+              }
+              
               const currentUser: IUser = {
                 name,
                 ethAddr,

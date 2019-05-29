@@ -23,6 +23,13 @@ export const SET_WEB3 = "SET_WEB3";
 export const SET_SCHAIN = "SET_SCHAIN";
 export const SET_ACCOUNT = "SET_ACCOUNT";
 
+/*
+export enum ActionType {
+  add = "ADD",
+  delete = "DELETE",
+  updateStatus = "UPDATE"
+}
+*/
 
 export const notify = (msg: string, success?: boolean) => {
   !success ? toast(msg) : toast.success(msg, { autoClose: false });
@@ -235,6 +242,10 @@ export const initWeb3 = async (
     } else {
       // success
       //console.log("web3 loaded, account is:", web3Context.account);
+
+      web3State.web3 = web3Context.library;
+      web3State.account = await web3State.web3.eth.getAccounts();
+
       dispatch({
         type: SET_ACCOUNT,
         payload: web3Context.account
