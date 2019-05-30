@@ -61,6 +61,8 @@ const initialState: IAppState = {
   }
 };*/
 
+export const SideChainContext = React.createContext({sideChain:'loom', stability:'0.00001'});
+
 export const Store = React.createContext<IAppState | any>(initialState);
 /*export const ChainStateStore = React.createContext<IChainState | any>(
   initialChainState
