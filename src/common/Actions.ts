@@ -86,7 +86,6 @@ export const fetchSkills = async (
 
 
 export const fetchUsers = async (
-  web3State: IWeb3State,
   sChainState: ISideChainState,
   dispatch: any
 ) => {
@@ -286,6 +285,9 @@ export const initWeb3 = async (
   }
 };*/
 
+
+
+
 export const initSChain = async (
   sChainState: ISideChainState,
   dispatch: any
@@ -297,10 +299,32 @@ export const initSChain = async (
 
   sChainState.sChainClient = sChainClient;
   sChainClient.sChainContract = contractJSON;
-
+  
   dispatch({
     type: SET_SCHAIN,
     payload: sChainState
   });
 
 };
+
+export const initSideChain = async (
+  dispatch: any
+) => {
+
+  console.log("Action.initSChain()");
+  const contractJSON = SCHAIN_CONTRACT_JSON;
+  const sChainClient = await getSChainClient(contractJSON);
+  
+  let sChainState:ISideChainState = {
+    sChainClient: sChainClient,
+    sChainContract: contractJSON 
+  }
+  
+  dispatch({
+    type: SET_SCHAIN,
+    payload: sChainState
+  });
+
+};
+
+

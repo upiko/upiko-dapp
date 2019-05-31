@@ -2,8 +2,6 @@ import React from "react";
 import {
   IAction,
   IAppState,
-  IChainState,
-  IWeb3State,
   ISideChainState
 } from "./Interfaces";
 import {
@@ -16,10 +14,8 @@ import {
   SET_SCHAIN,
   SET_ACCOUNT
 } from "./Actions";
-import { metaMaskWeb3 } from "../utils/getWeb3";
 
-//ETH CONTRACT
-//SCHAIN CONTRACT
+
 
 const initialState: IAppState = {
   web3State: {
@@ -49,24 +45,10 @@ const initialState: IAppState = {
   }
 };
 
-/*const initialChainState: IChainState = {
-  web3State: {
-    web3: {},
-    accounts: [],
-    contract: {}
-  },
-  sChainState: {
-    sChainClient: {},
-    sChainContract: {}
-  }
-};*/
 
-export const SideChainContext = React.createContext({sideChain:'loom', stability:'0.00001'});
+
 
 export const Store = React.createContext<IAppState | any>(initialState);
-/*export const ChainStateStore = React.createContext<IChainState | any>(
-  initialChainState
-);*/
 
 function reducer(state: IAppState, action: IAction | any): IAppState {
   switch (action.type) {
@@ -90,6 +72,11 @@ function reducer(state: IAppState, action: IAction | any): IAppState {
           account: ''
         }
       };
+    case SET_SCHAIN:
+          return {
+            ...state,
+            sChainState: action.payload
+          }
     case FETCH_PROVIDERS_DATA:
       return { ...state, providerState: { providers: action.payload } };
     case SKILLS_LIST:
@@ -110,9 +97,6 @@ function reducer(state: IAppState, action: IAction | any): IAppState {
   }
 }
 
-/*
-
-*/
 
 export function StoreProvider(props: any): JSX.Element {
   const [state, dispatch] = React.useReducer(reducer, initialState);
@@ -123,15 +107,3 @@ export function StoreProvider(props: any): JSX.Element {
   );
 }
 
-//React.useWeb3  or initialize now
-//React.useSChain
-/*export function ChainStateStoreProvider(props: any): JSX.Element {
-  const web3State = initialChainState.web3State;
-  const sChainState = initialChainState.sChainState;
-
-  return (
-    <ChainStateStore.Provider value={{ web3State, sChainState }}>
-      {props.children}
-    </ChainStateStore.Provider>
-  );
-}*/

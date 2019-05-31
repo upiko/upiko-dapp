@@ -26,7 +26,7 @@ export const getSChainClient = async (
       networkId = LOOM_EXTDEV_NETWORK_ID;
     }
 
-    console.log("loading schain for network, and config params:", LOOM_NETWORK,  writeUrl, readUrl, networkId, contractJson);
+    //console.log("loading schain for network, and config params:", LOOM_NETWORK,  writeUrl, readUrl, networkId, contractJson);
 
     return new LoomClient(contractJson, writeUrl, readUrl, networkId);
   } catch (error) {

@@ -14,7 +14,7 @@ export default function AllUsers(props:any) {
   React.useEffect(() => {
     const load = async() => {
       await retrieveChainState(web3State, sChainState, dispatch);
-      await fetchUsers(web3State, sChainState, dispatch);
+      await fetchUsers(sChainState, dispatch);
     }
     load();
   }, []);

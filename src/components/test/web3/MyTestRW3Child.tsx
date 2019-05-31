@@ -8,7 +8,7 @@ interface AccountProps{
 export default function MyTestRW3Child(props:AccountProps) {
 
   React.useEffect(() => {
-    console.log("useEffect([props.account])");
+    //console.log("useEffect([props.account])");
   }, [props.account]);
 
   return (

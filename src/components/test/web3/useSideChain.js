@@ -1,7 +1,11 @@
 import React from 'react';
-import { SideChainContext } from '../../../common/Store';
+import { Store } from '../../../common/Store';
+
 
 export default function useSideChain() {
-  const sideChainContext = React.useContext(SideChainContext);
-  return sideChainContext;
+  const { state } = React.useContext(Store);
+
+  console.log ("useSideChain()", state.sChainState);
+
+  return state.sChainState;
 }
