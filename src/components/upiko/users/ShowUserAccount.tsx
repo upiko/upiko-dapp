@@ -5,6 +5,8 @@ import { fetchUser, retrieveChainState, useWeb3 } from '../../../common/Actions'
 import useChainState from '../../chainstate/useChainState';
 import useAccountWatch from '../../chainstate/useAccountWatch';
 import { useWeb3Context } from 'web3-react';
+import useSideChain from '../../test/web3/useSideChain';
+import useReactWeb3 from '../../chainstate/useReactWeb3';
 
 
 
@@ -17,6 +19,9 @@ export default function ShowUserAccount(props:any) {
   const web3Context = useWeb3Context();
   const [lastAcct, setLastAcct] = React.useState('');
 
+  const account = useReactWeb3();
+
+
   /*
  React.useEffect(() => {
     web3State.web3Context = web3Context;
@@ -28,13 +33,15 @@ export default function ShowUserAccount(props:any) {
   }, []);
 */
 
+
+  /*
   React.useEffect(() => {
     web3State.web3Context = web3Context;
     //initWeb3(web3State, dispatch);
     retrieveChainState(web3State, sChainState, dispatch);
   }, []);
 
-
+  */
   /*
   React.useEffect(() => {
 
@@ -69,6 +76,8 @@ export default function ShowUserAccount(props:any) {
 
  // useAccountWatch(web3State, dispatch, sChainState);
 
+
+  console.log("react3 web3 account=", account);
 
   return (
     <div style={{ background: '#ECECEC', padding: '30px' }}>
