@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card } from 'antd';
 import { Store } from '../../../common/Store';
-import { fetchUser, retrieveChainState, useWeb3 } from '../../../common/Actions';
+import { fetchUser, retrieveChainState, useWeb3, setAccount } from '../../../common/Actions';
 import useChainState from '../../chainstate/useChainState';
 import useAccountWatch from '../../chainstate/useAccountWatch';
 import { useWeb3Context } from 'web3-react';
@@ -19,70 +19,30 @@ export default function ShowUserAccount(props:any) {
   const web3Context = useWeb3Context();
   const [lastAcct, setLastAcct] = React.useState('');
 
-  const account = useReactWeb3();
-
-
-  /*
- React.useEffect(() => {
-    web3State.web3Context = web3Context;
-    const load = async() => {
-      await retrieveChainState(web3State, sChainState, dispatch);
-      await fetchUser(web3State.account, web3State, sChainState, dispatch);
-  }
-    load();
-  }, []);
-*/
-
-
-  /*
+  const context = useWeb3Context();
   React.useEffect(() => {
-    web3State.web3Context = web3Context;
-    //initWeb3(web3State, dispatch);
-    retrieveChainState(web3State, sChainState, dispatch);
-  }, []);
+    context.setFirstValidConnector(['MetaMask']);
+  }, [])
 
-  */
-  /*
   React.useEffect(() => {
-
-    const load = async() => {
-      await fetchUser(lastAcct, web3State, sChainState, dispatch);
-    }
-
-    
-    web3State.web3Context = web3Context;
-    const currAcct = web3Context.account;
-    useWeb3(web3State, dispatch);
-    if (lastAcct !== currAcct){
-      console.log("acct changed")
-      if (currAcct){
-        console.log("lastAcct", lastAcct);
-        setLastAcct(currAcct);
-        //load();
+    console.log("ShowUserAccount.useEffect([context.account])");
+    if (!context.active && !context.error) {
+      console.log("context is !active, !error, assuming loading");
+    } else if (context.error) {
+      console.error("context is in error", context.error);    
+    } else {
+      let temp = context.account;
+      if (temp){
+        setLastAcct(temp);
       }
-    }
-  });
-  */
-
-
-/*
-  React.useEffect(() => {
-    console.log("UUUUUUUUUUUseEffect, on accounts");
-    setethAddr(web3State.accounts[0]);
-    setName(state.userState.name);
-    setIsProvider(state.userState.isProvider);
-  }, [web3State.accounts[0]]);
-*/
-
- // useAccountWatch(web3State, dispatch, sChainState);
-
-
-  console.log("react3 web3 account=", account);
+    } 
+  }, [context.account]);
+  
 
   return (
     <div style={{ background: '#ECECEC', padding: '30px' }}>
       <Card title="Current User Account" bordered={false} >
-      <p>Eth Account: {ethAddr}</p>
+      <p>Eth Account: {lastAcct}</p>
        <p>User name: {name}</p>
        <p>isProvider?: {name ?  isProvider.toString() : ""}</p>
       </Card>
