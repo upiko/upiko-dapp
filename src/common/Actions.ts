@@ -63,7 +63,6 @@ export const fetchNone = async (
 
 
 export const fetchSkills = async (
-  web3State: IWeb3State,
   sChainState: ISideChainState,
   dispatch: any
 ) => {
@@ -106,7 +105,6 @@ export const fetchUsers = async (
 
 export const fetchUser = async (
   ethAddr: string,
-  web3State: IWeb3State,
   sChainState: ISideChainState,
   dispatch: any
 ) => {
@@ -180,7 +178,6 @@ export const addProvider = async (
 
 export const addUser = async (
   user: IUser,
-  web3State: IWeb3State,
   sChainState: ISideChainState,
   dispatch: any
 ) => {
@@ -300,6 +297,8 @@ export const initSChain = async (
   sChainState.sChainClient = sChainClient;
   sChainClient.sChainContract = contractJSON;
   
+
+
   dispatch({
     type: SET_SCHAIN,
     payload: sChainState
@@ -314,6 +313,8 @@ export const initSideChain = async (
   console.log("Action.initSChain()");
   const contractJSON = SCHAIN_CONTRACT_JSON;
   const sChainClient = await getSChainClient(contractJSON);
+  
+  await sChainClient.loadContract();
   
   let sChainState:ISideChainState = {
     sChainClient: sChainClient,

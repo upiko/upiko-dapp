@@ -1,25 +1,24 @@
 import React from "react";
 import { Input, Button, Card } from "antd";
 import { Store } from "../../../common/Store";
-import { withWeb3Contract } from "../../chainstate/Web3StateWrap";
-import { withSChain } from "../../chainstate/SideChainWrap";
-import { addUser, retrieveChainState } from "../../../common/Actions";
-import { IProvider, IUser } from "../../../common/Interfaces";
-import { useWeb3Context } from 'web3-react';
+import { addUser, initSideChain } from "../../../common/Actions";
+import useReactWeb3 from "../../chainstate/useReactWeb3";
+import { IUser } from "../../../common/Interfaces";
 
 export default function AddUserToSideChain(props: any) {
   const { state, dispatch } = React.useContext(Store);
-  const { web3State, sChainState } = state;
   const [name, setName] = React.useState("");
 
+  const ethAccount = useReactWeb3();
+
+  const sChainState = state.sChainState;
   React.useEffect(() => {
-    const load = async() => {
-      await retrieveChainState(web3State, sChainState, dispatch);
-    }
-    load();
+    console.log("ShowUserAccount.useEffect([]), calling initSideChain");
+    initSideChain(dispatch);
   }, []);
 
-  const web3Context = useWeb3Context();
+
+  console.log("AddUserToSideChain, state:", state);
 
   return (
     <div style={{ background: '#ECECEC', padding: '30px' }}>
@@ -39,10 +38,10 @@ export default function AddUserToSideChain(props: any) {
             type="dashed"
             onClick={() => {
               //const ethAddr = web3State.accounts[0];
-              console.log("account:", web3Context.account);
+              console.log("account:", ethAccount);
               let ethAddr = '' 
-              if (web3Context.account){
-                ethAddr = web3Context.account;
+              if (ethAccount){
+                ethAddr = ethAccount;
               } else {
                 console.error("something went wrong, web3account expected, but was not available")
               }
@@ -53,7 +52,7 @@ export default function AddUserToSideChain(props: any) {
                 isProvider: false
               };
               console.log("adding user", name);
-              addUser(currentUser, web3State, sChainState, dispatch);
+              addUser(currentUser, sChainState, dispatch);
               setName("");
             }}
           >
