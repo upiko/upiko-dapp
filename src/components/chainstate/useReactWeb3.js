@@ -4,23 +4,26 @@ import { useWeb3Context } from "web3-react";
 
 
 export default function useReactWeb3(){
-  const [account, setAccount] = React.useState('');
   const web3Context = useWeb3Context();
-
-  console.log("useReactWeb3()", web3Context);
+  const [web3Acct, setWeb3Acct] = React.useState('');
 
   React.useEffect(() => {
-    console.log("useReactWeb3().useEffect()", web3Context);
+    web3Context.setFirstValidConnector(['MetaMask']);
+  }, []);
 
-    if (!web3Context.active && !web3Context.error){
-      console.log("useReactWeb3() context not active and not error, assuming loading.");
-    }else if (web3Context.error) {
-      console.error("useReactWeb3() error occured", web3Context.error);
-    }else {
-      console.log("account set", web3Context.account);
-      setAccount(web3Context.account);
-    }
-  });
+  React.useEffect(() => {
+    //console.log("ShowUserAccount.useEffect([context.account])");
+    if (!web3Context.active && !web3Context.error) {
+      //console.log("context is !active, !error, assuming loading");
+    } else if (web3Context.error) {
+      console.error("context is in error", web3Context.error);    
+    } else {
+      let temp = web3Context.account;
+      if (temp){
+        setWeb3Acct(temp);
+      }
+    } 
+  }, [web3Context.account]);
 
-  return account;
+  return web3Acct;
 }

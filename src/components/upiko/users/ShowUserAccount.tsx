@@ -16,36 +16,17 @@ export default function ShowUserAccount(props:any) {
   const [ethAddr, setethAddr] = React.useState('');
   const [name, setName] = React.useState('');
   const [isProvider, setIsProvider] = React.useState('');
-  const web3Context = useWeb3Context();
-  const [lastAcct, setLastAcct] = React.useState('');
-
-  const context = useWeb3Context();
-  React.useEffect(() => {
-    context.setFirstValidConnector(['MetaMask']);
-  }, [])
-
-  React.useEffect(() => {
-    console.log("ShowUserAccount.useEffect([context.account])");
-    if (!context.active && !context.error) {
-      console.log("context is !active, !error, assuming loading");
-    } else if (context.error) {
-      console.error("context is in error", context.error);    
-    } else {
-      let temp = context.account;
-      if (temp){
-        setLastAcct(temp);
-      }
-    } 
-  }, [context.account]);
-  
+    
+  const acct = useReactWeb3();
 
   return (
     <div style={{ background: '#ECECEC', padding: '30px' }}>
       <Card title="Current User Account" bordered={false} >
-      <p>Eth Account: {lastAcct}</p>
+      <p>Eth Account: {acct}</p>
        <p>User name: {name}</p>
        <p>isProvider?: {name ?  isProvider.toString() : ""}</p>
       </Card>
     </div>
   )
 }
+
