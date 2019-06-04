@@ -198,21 +198,24 @@ export const addUser = async (
   });
 };
 
-
-
 export const addSkill = async (
-  skillName:string,
-  sChainState: ISideChainState,
+  skillName: string,
+  loomObj: ILoomObject|any, 
   dispatch: any
 ) => {
   console.log("Action.addSkill()");
-  const { sChainClient } = sChainState;
-  const instance = await contractInstanceFromState(sChainState);
-  await instance.methods
-    .addSkill(skillName)
-    .send({ from: sChainClient.getCurrentUserAddress() });
+ 
+  try{
+    const tx = await loomObj.instance.methods
+      .addSkill(skillName)
+      .send({ from: loomObj.currentUserAddress });
 
-  console.log("sChain tx submitted - addSkill:");
+    console.log("sChain tx submitted - addSkill:", tx);
+    notify("tx submitted" + tx);
+  }catch (error){
+    console.error("Error occured submitting transaciton to sideChain:", error);
+    
+  }
 };
 
 

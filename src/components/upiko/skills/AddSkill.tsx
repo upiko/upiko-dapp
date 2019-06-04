@@ -1,21 +1,31 @@
 import React from 'react'
-import { initSideChain, addSkill } from '../../../common/Actions';
+import { addSkill } from '../../../common/Actions';
 import { Store } from '../../../common/Store';
 import { Card, Input, Button } from 'antd';
+import useLoom from '../../chainstate/useLoom';
+import { ILoomObject } from '../../../common/Interfaces';
 
 
 export default function AddSkill() {
   const { state, dispatch } = React.useContext(Store);
   const [name, setName] = React.useState("");
 
-  React.useEffect(() => {
-    console.log("AddSkill.useEffect([]), calling initSideChain");
-    initSideChain(dispatch);
-  }, []);
+  const loomObj = useLoom();
 
+  //console.log("AddSkill, state:", state);
 
-
-  console.log("AddSkill, state:", state);
+  const addSkillLocal = async(name:string, loomObj:ILoomObject|any) => {
+    console.log("addSkillLocal.adding user", name);
+    console.log("loomObj", loomObj);
+    if (loomObj && loomObj.instance){  
+      await loomObj.instance.methods.addSkill(name).send({
+        from: loomObj.currentUserAddress
+      });
+    }else{
+      console.error("loom Obj is not available");
+    }
+    
+  }
 
   return (
     <div style={{ background: '#ECECEC', padding: '30px' }}>
@@ -33,11 +43,10 @@ export default function AddSkill() {
         <div className="row">
           <Button
             type="dashed"
-            onClick={() => {
-              
-              
+            onClick={async() => {       
               console.log("adding user", name);
-              //addSkill(name, sChainState, dispatch);
+              //await addSkill(name, loomObj, dispatch);       
+              await addSkillLocal(name, loomObj);
               setName("");
             }}
           >
