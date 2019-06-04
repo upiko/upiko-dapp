@@ -1,3 +1,6 @@
+import { ConnectionInfo } from "ethers/utils";
+import Web3 from "web3";
+
 /**
 |--------------------------------------------------
 |  Interfaces
@@ -5,6 +8,33 @@
 */
 
 export type Dispatch = React.Dispatch<IAction>;
+
+/*
+if (process.env.NETWORK == 'extdev') {
+      writeUrl = 'ws://extdev-plasma-us1.dappchains.com:80/websocket'
+      readUrl = 'ws://extdev-plasma-us1.dappchains.com:80/queryws'
+      networkId = 'extdev-plasma-us1'
+    }*/
+export interface ILoomConnectionInfo {
+  networkAlias: string;  // LOCAL_DEV | TEST | EXTDEV | PROD
+  writeUrl: string;    // 'ws://127.0.0.1:46658/websocket';
+  readUrl: string;    //  'ws://127.0.0.1:46658/queryws';
+  networkId : string; //  'default' 
+}
+
+export interface ILoomObject {
+  contract: any;
+  client: any;
+  privateKey: Uint8Array|any;
+  publicKey: Uint8Array|any;
+  currentUserAddress: string;
+  web3: any;
+  instance: any;
+  currentNetwork: string;
+
+  connectionInfo: ILoomConnectionInfo|any;
+}
+
 
 export interface IAppState {
   web3State: IWeb3State;

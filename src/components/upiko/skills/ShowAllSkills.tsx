@@ -1,41 +1,22 @@
 import React from 'react'
-
 import { Card, List } from 'antd';
-import { fetchSkills, retrieveChainState, initSideChain } from '../../../common/Actions';
+import { fetchSkills } from '../../../common/Actions';
+import useLoom from '../../chainstate/useLoom';
+import useLoomToLoad from '../../chainstate/useLoomToLoad';
 import { Store } from '../../../common/Store';
-import useSideChain from '../../chainstate/useSideChain';
+
 
 
 
 export default function ShowAllSkills(props:any) {
+  const { dispatch } = React.useContext(Store);
+  const loomObj = useLoom();
+  const skills = useLoomToLoad(loomObj, async() => {
+    return await fetchSkills(loomObj, dispatch);
+  });
 
-  const { dispatch, state } = React.useContext(Store);
-  const sChainState = useSideChain();
+  console.log("skills", skills);
 
-  React.useEffect(() => {
-    const load = async() => {
-      await initSideChain(dispatch);
-    }
-    load();
-  }, []);
-
-  React.useEffect(() => {
-    const load = async() => {
-      console.log("making call to fetchuser()")
-      await fetchSkills(sChainState, dispatch);
-    }
-    if (sChainState.sChainClient.networkId){
-      console.log("sChain is available");
-     load();
-    }else {
-      console.error("no sChainClient on this useEffect() call");
-    }
-  }, [sChainState]);
-
-  //useChainState(web3State, sChainState, dispatch, fetchSkills);
-
-  const {skills} = state.skillsList;
-  
   return (
     <div style={{ background: '#ECECEC', padding: '30px' }}>
       <Card title="All Skills" bordered={false} >

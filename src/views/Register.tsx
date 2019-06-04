@@ -1,6 +1,6 @@
 import React, { useState, lazy } from "react";
 import { Store } from "./../common/Store";
-import ChainStateRender from "../components/chainstate/ChainStateRender";
+import ChainStateRender from "../components/chainstate/hoc/ChainStateRender";
 import Header from "./Header";
 import Footer from "./Footer";
 

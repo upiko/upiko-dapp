@@ -1,8 +1,8 @@
 import React from "react";
 import { Button } from "antd";
 import { fetchProviders } from "../../../common/Actions";
-import { withWeb3Contract } from "../../chainstate/Web3StateWrap";
-import { withSChain } from "../../chainstate/SideChainWrap";
+import { withWeb3Contract } from "../../chainstate/hoc/Web3StateWrap";
+import { withSChain } from "../../chainstate/hoc/SideChainWrap";
 import { Store } from "../../../common/Store";
 
 

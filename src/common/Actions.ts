@@ -4,7 +4,8 @@ import {
   IUser,
   IWeb3State,
   ISideChainState,
-  Dispatch
+  Dispatch,
+  ILoomObject
 } from "./Interfaces";
 import { contractInstanceFromState } from "./../utils/sideChainUtils";
 import _ from "lodash";
@@ -63,24 +64,25 @@ export const fetchNone = async (
 
 
 export const fetchSkills = async (
-  sChainState: ISideChainState,
+  loomObj: ILoomObject|any,
   dispatch: any
 ) => {
   console.log("Action.fetchSkills()");
-  let instance = await contractInstanceFromState(sChainState);
-  let skillsCount = await instance.methods.numberOfSkills().call();
+  let skillsCount = await loomObj.instance.methods.numberOfSkills().call();
 
   //console.log("skillsCount:", skillsCount);
 
   let skills = [];
   for (let i = 0; i < skillsCount; i++) {
-    let nextSkill = await instance.methods.skillsList(i).call();
+    let nextSkill = await loomObj.instance.methods.skillsList(i).call();
     skills.push(nextSkill);
   }
-  return dispatch({
+  dispatch({
     type: SKILLS_LIST,
     payload: skills
   });
+
+  return skills;
 };
 
 
@@ -178,21 +180,39 @@ export const addProvider = async (
 
 export const addUser = async (
   user: IUser,
-  sChainState: ISideChainState,
+  loomObj: ILoomObject|any,
   dispatch: any
 ) => {
   console.log("Action.addUser()");
-  const { sChainClient } = sChainState;
-  const instance = await contractInstanceFromState(sChainState);
+ 
+  //const instance = await contractInstanceFromState(sChainState);
+  loomObj.
   instance.methods
     .addUser(user.name, user.ethAddr, user.isProvider)
-    .send({ from: sChainClient.getCurrentUserAddress() });
+    .send({ from: 'LoomObj.currentUserAddress' });
 
   console.log("sChain tx submitted - addUser");
   return dispatch({
     type: SET_USER,
     payload: user
   });
+};
+
+
+
+export const addSkill = async (
+  skillName:string,
+  sChainState: ISideChainState,
+  dispatch: any
+) => {
+  console.log("Action.addSkill()");
+  const { sChainClient } = sChainState;
+  const instance = await contractInstanceFromState(sChainState);
+  await instance.methods
+    .addSkill(skillName)
+    .send({ from: sChainClient.getCurrentUserAddress() });
+
+  console.log("sChain tx submitted - addSkill:");
 };
 
 

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Store } from "../../../common/Store";
-import { withWeb3Contract } from "../../chainstate/Web3StateWrap";
-import { withSChain } from "../../chainstate/SideChainWrap";
+import { withWeb3Contract } from "../../chainstate/hoc/Web3StateWrap";
+import { withSChain } from "../../chainstate/hoc/SideChainWrap";
 import { fetchProviders } from "../../../common/Actions";
 import { List, Typography } from "antd";
 import { IProvider } from "../../../common/Interfaces";

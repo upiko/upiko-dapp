@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { getSChainClient } from "./../../utils/getSideChain";
+import { getSChainClient } from "../../../utils/getSideChain";
 
 const SChainContext = React.createContext({});
 

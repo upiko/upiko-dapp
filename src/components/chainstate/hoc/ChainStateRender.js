@@ -2,8 +2,8 @@ import React from 'react'
 import Web3Wrap from './Web3Wrap';
 import Web3StateWrap from './Web3StateWrap';
 import SideChainWrap from './SideChainWrap';
-import UpikoEth from './../../contracts/UpikoEth.json';
-import UpikoApp from './../../contracts/UpikoApp.json';
+import UpikoEth from '../../../contracts/UpikoEth.json';
+import UpikoApp from '../../../contracts/UpikoApp.json';
 
 
 /**

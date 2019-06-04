@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Web3 from "web3";
-import { WEB3_ACCOUNT_CHECK_INTERVAL } from "./../../config";
+import { WEB3_ACCOUNT_CHECK_INTERVAL } from "../../../config";
 
 const Web3Context = React.createContext({});
 

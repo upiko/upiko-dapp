@@ -1,5 +1,6 @@
 import React from "react";
 import ShowAllSkills from "../components/upiko/skills/ShowAllSkills";
+import AddSkill from "../components/upiko/skills/AddSkill";
 
 
 export default function Skills(props:any) {
@@ -13,6 +14,7 @@ export default function Skills(props:any) {
           <div className="heading-underline"></div>   
         
           <ShowAllSkills />
+          <AddSkill />
          
         </div>
       </div>

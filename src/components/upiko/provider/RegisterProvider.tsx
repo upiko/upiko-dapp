@@ -2,8 +2,8 @@ import * as React from "react";
 import { Store } from "../../../common/Store";
 import { addProvider } from "../../../common/Actions";
 import { IProvider } from "../../../common/Interfaces";
-import { withWeb3Contract } from "../../chainstate/Web3StateWrap";
-import { withSChain } from "../../chainstate/SideChainWrap";
+import { withWeb3Contract } from "../../chainstate/hoc/Web3StateWrap";
+import { withSChain } from "../../chainstate/hoc/SideChainWrap";
 import { Input, Button} from "antd";
 
 
