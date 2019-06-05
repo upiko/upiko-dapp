@@ -1,22 +1,18 @@
 import React from "react";
 import { Input, Button, Card } from "antd";
 import { Store } from "../../../common/Store";
-import { addUser, initSideChain } from "../../../common/Actions";
+import { addUser } from "../../../common/Actions";
 import useReactWeb3 from "../../chainstate/useReactWeb3";
 import { IUser } from "../../../common/Interfaces";
 import useLoom from "../../chainstate/useLoom";
-import useStore from "../../../common/useStore";
-
 
 
 export default function AddUserToSideChain(props: any) {
-  //const { dispatch } = React.useContext(Store);
-  const [dispatch] = useStore();
+  const {dispatch} = React.useContext(Store);
   const [name, setName] = React.useState("");
   const ethAccount = useReactWeb3();
   const loomObj = useLoom();
   
-
   return (
     <div style={{ background: '#ECECEC', padding: '30px' }}>
       <Card title="Add User" bordered={false} >

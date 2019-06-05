@@ -15,8 +15,6 @@ export default function ShowAllSkills(props:any) {
     return await fetchSkills(loomObj, dispatch);
   });
 
-  console.log("skills", skills);
-
   return (
     <div style={{ background: '#ECECEC', padding: '30px' }}>
       <Card title="All Skills" bordered={false} >

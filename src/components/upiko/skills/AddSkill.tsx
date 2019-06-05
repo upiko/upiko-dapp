@@ -2,12 +2,12 @@ import React from 'react'
 import { addSkill } from '../../../common/Actions';
 import { Card, Input, Button } from 'antd';
 import useLoom from '../../chainstate/useLoom';
-import useStore from '../../../common/useStore';
+import { Store } from '../../../common/Store';
 
 
 export default function AddSkill() {
   const loomObj = useLoom();
-  const [dispatch] = useStore();
+  const {dispatch} = React.useContext(Store);
   const [name, setName] = React.useState("");
 
 
@@ -30,7 +30,6 @@ export default function AddSkill() {
             onClick={async() => {       
               console.log("adding user", name);
               await addSkill(name, loomObj, dispatch);       
-              //await addSkillLocal(name, loomObj);
               setName("");
             }}
           >
@@ -41,16 +40,3 @@ export default function AddSkill() {
   </div>
   )
 }
-
-/*
-  const addSkillLocal = async(name:string, loomObj:ILoomObject|any) => {
-    console.log("addSkillLocal.adding user", name);
-    console.log("loomObj", loomObj);
-    if (loomObj && loomObj.instance){  
-      await loomObj.instance.methods.addSkill(name).send({
-        from: loomObj.currentUserAddress
-      });
-    }else{
-      console.error("loom Obj is not available");
-    }    
-  }*/

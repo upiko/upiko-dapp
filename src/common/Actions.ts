@@ -4,33 +4,14 @@ import {
   IUser,
   IWeb3State,
   ISideChainState,
-  Dispatch,
   ILoomObject
 } from "./Interfaces";
 import { contractInstanceFromState } from "./../utils/sideChainUtils";
 import _ from "lodash";
 import { toast } from "react-toastify";
-import { metaMaskWeb3 } from "../utils/getWeb3";
-import { getSChainClient } from "../utils/getSideChain";
-import { useWeb3Context } from 'web3-react';
-import SCHAIN_CONTRACT_JSON from  "./../contracts/UpikoApp.json";
+import { ActionType } from "./Store";
 
-export const FETCH_PROVIDERS_DATA = "FETCH_PROVIDERS_DATA";
-export const ADD_PROVIDER = "ADD_PROVIDER";
-export const SET_USER = "SET_USER";
-export const ALL_USERS = "ALL_USERS";
-export const SKILLS_LIST = "SKILLS_LIST";
-export const SET_WEB3 = "SET_WEB3";
-export const SET_SCHAIN = "SET_SCHAIN";
-export const SET_ACCOUNT = "SET_ACCOUNT";
 
-/*
-export enum ActionType {
-  add = "ADD",
-  delete = "DELETE",
-  updateStatus = "UPDATE"
-}
-*/
 
 export const notify = (msg: string, success?: boolean) => {
   !success ? toast(msg) : toast.success(msg, { autoClose: false });
@@ -47,38 +28,25 @@ export const setAccount = (
 ) => {
   console.log("Action.setAccount()");
   dispatch({
-    type: SET_ACCOUNT,
+    type: ActionType.SET_ACCOUNT,
     payload: value
   })
 }
-
-
-export const fetchNone = async (
-  web3State: IWeb3State,
-  sChainState: ISideChainState,
-  dispatch: Dispatch
-) => {
-  console.log("Action.fetchAny()");
-  await retrieveChainState(web3State, sChainState, dispatch);
-};
 
 
 export const fetchSkills = async (
   loomObj: ILoomObject|any,
   dispatch: any
 ) => {
-  console.log("Action.fetchSkills()");
   let skillsCount = await loomObj.instance.methods.numberOfSkills().call();
-
-  //console.log("skillsCount:", skillsCount);
-
   let skills = [];
+
   for (let i = 0; i < skillsCount; i++) {
     let nextSkill = await loomObj.instance.methods.skillsList(i).call();
     skills.push(nextSkill);
   }
   dispatch({
-    type: SKILLS_LIST,
+    type: ActionType.SKILLS_LIST,
     payload: skills
   });
 
@@ -99,7 +67,7 @@ export const fetchUsers = async (
     users.push(nextUser);
   }
   return dispatch({
-    type: ALL_USERS,
+    type: ActionType.ALL_USERS,
     payload: users
   });
 };
@@ -122,7 +90,7 @@ export const fetchUser = async (
   }
 
   return dispatch({
-    type: SET_USER,
+    type: ActionType.SET_USER,
     payload: inflatedUser
   });
 };
@@ -149,7 +117,7 @@ export const fetchProviders = async (
 
   console.log("allAddresses::", allAddresses);
   return dispatch({
-    type: FETCH_PROVIDERS_DATA,
+    type: ActionType.FETCH_PROVIDERS_DATA,
     payload: providers
   });
 };
@@ -172,7 +140,7 @@ export const addProvider = async (
 
   console.log("sChain tx submitted - addProvider");
   return dispatch({
-    type: ADD_PROVIDER,
+    type: ActionType.ADD_PROVIDER,
     payload: provider
   });
 };
@@ -185,7 +153,6 @@ export const addUser = async (
 ) => {
   console.log("Action.addUser()");
  
-  //const instance = await contractInstanceFromState(sChainState);
   loomObj.
   instance.methods
     .addUser(user.name, user.ethAddr, user.isProvider)
@@ -193,7 +160,7 @@ export const addUser = async (
 
   console.log("sChain tx submitted - addUser");
   return dispatch({
-    type: SET_USER,
+    type: ActionType.SET_USER,
     payload: user
   });
 };
@@ -218,137 +185,5 @@ export const addSkill = async (
   }
 };
 
-
-export const retrieveChainState = async (
-  web3State: IWeb3State,
-  sChainState: ISideChainState,
-  dispatch: Dispatch
-) => {
-  console.log("Action.retrieveChainState()");
-  
-  await initWeb3(web3State, dispatch);
-  await initSChain(sChainState, dispatch);
-  
-  //console.log("chainstate", web3State, sChainState);
-};
-
-// could have a force flag, so that if not force, do not re-init web3
-export const initWeb3 = async (
-  web3State: IWeb3State,
-  dispatch: any
-) => {
-  const web3Context = web3State.web3Context;
-  console.log("Action.initWeb3()");
-  web3Context.setFirstValidConnector(['MetaMask']);
-  }
-
-
-  export const useWeb3 = async (
-    web3State: IWeb3State,
-    dispatch: any
-  ) => {
-    const web3Context = web3State.web3Context;
-    //console.log("Action.useWeb3()");
-  
-    if (!web3Context.active && !web3Context.error) {
-      // loading
-      //return ...
-      console.log("loading web3..")
-    } else if (web3Context.error) {
-      //error
-      //return ...
-      console.error("something went wrong loading web3", web3Context.error);
-    } else {
-      // success
-      //console.log("web3 loaded, account is:", web3Context.account);
-
-      web3State.web3 = web3Context.library;
-      web3State.account = await web3State.web3.eth.getAccounts();
-
-      dispatch({
-        type: SET_ACCOUNT,
-        payload: web3Context.account
-      });
-    }
-  
-
-
-
-  /*
-  //TODO: if web3 is undefined, web3 = {}
-  let web3 = await metaMaskWeb3();
-
-  //console.log("initWeb3(), web3:", web3);
-  if (!_.isUndefined(web3) && web3) {
-    web3State.web3 = web3;
-    web3State.accounts = await web3.eth.getAccounts();
-
-    dispatch({
-      type: SET_WEB3,
-      payload: web3State
-    });
-
-  } else {
-    console.error("initWeb3 - error getting web 3 (not defined)");
-  }*/
-  
-};
-
-/*export const loadWeb3AcctInfo = async (web3State: IWeb3State) => {
-  console.log("Action.loadWeb3AccountInfo()");
-  if (web3State.web3 && web3State.accounts.length) {
-    let balance = await web3State.web3.eth.getBalance(web3State.accounts);  
-  } else {
-    console.error(
-      "loadWeb3AccountInfo() - web3 or web3 accounts are not available"
-    );
-  }
-};*/
-
-
-
-
-export const initSChain = async (
-  sChainState: ISideChainState,
-  dispatch: any
-) => {
-
-  console.log("Action.initSChain()");
-  const contractJSON = SCHAIN_CONTRACT_JSON;
-  const sChainClient = await getSChainClient(contractJSON);
-
-  sChainState.sChainClient = sChainClient;
-  sChainClient.sChainContract = contractJSON;
-  
-
-
-  dispatch({
-    type: SET_SCHAIN,
-    payload: sChainState
-  });
-
-};
-
-export const initSideChain = async (
-  dispatch: any
-) => {
-
-  console.log("Action.initSChain()");
-  const contractJSON = SCHAIN_CONTRACT_JSON;
-  const sChainClient = await getSChainClient(contractJSON);
-  
-  await sChainClient.loadContract();
-  
-  let sChainState:ISideChainState = {
-    sChainClient: sChainClient,
-    sChainContract: contractJSON 
-  }
-  
-  dispatch({
-    type: SET_SCHAIN,
-    payload: sChainState
-  });
-
-};
 
 

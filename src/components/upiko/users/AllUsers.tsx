@@ -1,7 +1,7 @@
 import React from 'react'
 import { Card, List, Avatar } from 'antd';
 import { Store } from '../../../common/Store';
-import { fetchUsers, retrieveChainState } from '../../../common/Actions';
+import { fetchUsers } from '../../../common/Actions';
 import { IUser } from '../../../common/Interfaces';
 
 
@@ -13,7 +13,7 @@ export default function AllUsers(props:any) {
 
   React.useEffect(() => {
     const load = async() => {
-      await retrieveChainState(web3State, sChainState, dispatch);
+      //await retrieveChainState(web3State, sChainState, dispatch);
       await fetchUsers(sChainState, dispatch);
     }
     load();
