@@ -1,32 +1,14 @@
 import React from 'react'
 import { addSkill } from '../../../common/Actions';
-import { Store } from '../../../common/Store';
 import { Card, Input, Button } from 'antd';
 import useLoom from '../../chainstate/useLoom';
-import { ILoomObject } from '../../../common/Interfaces';
+import useStore from '../../../common/useStore';
 
 
 export default function AddSkill() {
-  const { state, dispatch } = React.useContext(Store);
-  const [name, setName] = React.useState("");
-
   const loomObj = useLoom();
-
-  //console.log("AddSkill, state:", state);
-
-  const addSkillLocal = async(name:string, loomObj:ILoomObject|any) => {
-    console.log("addSkillLocal.adding user", name);
-    console.log("loomObj", loomObj);
-    if (loomObj && loomObj.instance){  
-      await loomObj.instance.methods.addSkill(name).send({
-        from: loomObj.currentUserAddress
-      });
-    }else{
-      console.error("loom Obj is not available");
-    }    
-  }
-
-  console.log("loomObj:", loomObj);
+  const [dispatch] = useStore();
+  const [name, setName] = React.useState("");
 
 
   return (
@@ -47,8 +29,8 @@ export default function AddSkill() {
             type="dashed"
             onClick={async() => {       
               console.log("adding user", name);
-              //await addSkill(name, loomObj, dispatch);       
-              await addSkillLocal(name, loomObj);
+              await addSkill(name, loomObj, dispatch);       
+              //await addSkillLocal(name, loomObj);
               setName("");
             }}
           >
@@ -59,3 +41,16 @@ export default function AddSkill() {
   </div>
   )
 }
+
+/*
+  const addSkillLocal = async(name:string, loomObj:ILoomObject|any) => {
+    console.log("addSkillLocal.adding user", name);
+    console.log("loomObj", loomObj);
+    if (loomObj && loomObj.instance){  
+      await loomObj.instance.methods.addSkill(name).send({
+        from: loomObj.currentUserAddress
+      });
+    }else{
+      console.error("loom Obj is not available");
+    }    
+  }*/

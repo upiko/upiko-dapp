@@ -5,18 +5,17 @@ import { addUser, initSideChain } from "../../../common/Actions";
 import useReactWeb3 from "../../chainstate/useReactWeb3";
 import { IUser } from "../../../common/Interfaces";
 import useLoom from "../../chainstate/useLoom";
+import useStore from "../../../common/useStore";
 
 
 
 export default function AddUserToSideChain(props: any) {
-  const { state, dispatch } = React.useContext(Store);
+  //const { dispatch } = React.useContext(Store);
+  const [dispatch] = useStore();
   const [name, setName] = React.useState("");
-  
   const ethAccount = useReactWeb3();
   const loomObj = useLoom();
   
-
-  console.log("loom obj", loomObj);
 
   return (
     <div style={{ background: '#ECECEC', padding: '30px' }}>

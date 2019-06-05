@@ -211,10 +211,10 @@ export const addSkill = async (
       .send({ from: loomObj.currentUserAddress });
 
     console.log("sChain tx submitted - addSkill:", tx);
-    notify("tx submitted" + tx);
+    notify("tx submitted, hash:" + tx.transactionHash);
   }catch (error){
     console.error("Error occured submitting transaciton to sideChain:", error);
-    
+    notifyError("Error occured during transaction:" + error);
   }
 };
 

@@ -4,14 +4,6 @@ import { Store } from '../../../common/Store';
 import useReactWeb3 from '../../chainstate/useReactWeb3';
 
 
-
-/*
-Unhandled Rejection (Error): invalid address (arg="_ethAddr", coderType="address", value="", version=4.0.28)
-
-Uncaught (in promise) {code: -32603, message: "Internal error", data: "invalid opcode 0xfe"}
-
-*/
-
 export default function ShowUserAccount(props:any) {
   const { state, dispatch } = React.useContext(Store);
   const [name, setName] = React.useState('');
