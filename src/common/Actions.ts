@@ -6,7 +6,6 @@ import {
   ISideChainState,
   ILoomObject
 } from "./Interfaces";
-import { contractInstanceFromState } from "./../utils/sideChainUtils";
 import _ from "lodash";
 import { toast } from "react-toastify";
 import { ActionType } from "./Store";
@@ -108,7 +107,7 @@ export const fetchProviders = async (
   console.log("web3State, from action", web3State);
 
   let providers: Array<IProvider> = [];
-  const { sChainClient } = sChainState;
+ /* const { sChainClient } = sChainState;
   let instance = await contractInstanceFromState(sChainState);
   let allAddresses = await instance.methods.getAllEthAddresses().call();
 
@@ -118,7 +117,7 @@ export const fetchProviders = async (
     providers.push({ name: name });
   }
 
-  console.log("allAddresses::", allAddresses);
+  console.log("allAddresses::", allAddresses);*/
   return dispatch({
     type: ActionType.FETCH_PROVIDERS_DATA,
     payload: providers
@@ -136,10 +135,10 @@ export const addProvider = async (
   console.log("eth address of user", web3State.accounts[0]);
 
   const { sChainClient } = sChainState;
-  let instance = await contractInstanceFromState(sChainState);
+ /* let instance = await contractInstanceFromState(sChainState);
   instance.methods
     .addProviderName(provider.name, web3State.accounts[0])
-    .send({ from: sChainClient.getCurrentUserAddress() });
+    .send({ from: sChainClient.getCurrentUserAddress() });*/
 
   console.log("sChain tx submitted - addProvider");
   return dispatch({

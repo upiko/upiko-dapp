@@ -1,12 +1,10 @@
 import React from "react";
 import { Button } from "antd";
 import { fetchProviders } from "../../../common/Actions";
-import { withWeb3Contract } from "../../chainstate/hoc/Web3StateWrap";
-import { withSChain } from "../../chainstate/hoc/SideChainWrap";
 import { Store } from "../../../common/Store";
 
 
-function ReloadProviders(props: any) {
+export default function ReloadProviders(props: any) {
   const { state, dispatch } = React.useContext(Store);
   const { web3State, sChainState } = props;
 
@@ -27,4 +25,3 @@ function ReloadProviders(props: any) {
   );
 }
 
-export default withWeb3Contract(withSChain(ReloadProviders));

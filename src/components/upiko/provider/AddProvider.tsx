@@ -3,11 +3,10 @@ import { Input, Button } from "antd";
 import { addProvider } from "../../../common/Actions";
 import { Store } from "../../../common/Store";
 import { IProvider } from "../../../common/Interfaces";
-import { withWeb3Contract } from "../../chainstate/hoc/Web3StateWrap";
-import { withSChain } from "../../chainstate/hoc/SideChainWrap";
 
 
-function AddProvider(props: any) {
+
+export default function AddProvider(props: any) {
   const { state, dispatch } = React.useContext(Store);
   const { web3State, sChainState } = props;
   const [providerName, setProviderName] = useState("");
@@ -36,4 +35,3 @@ function AddProvider(props: any) {
 }
 
 
-export default withWeb3Contract(withSChain(AddProvider));

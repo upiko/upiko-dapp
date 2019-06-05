@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import { Store } from "../../../common/Store";
-import { withWeb3Contract } from "../../chainstate/hoc/Web3StateWrap";
-import { withSChain } from "../../chainstate/hoc/SideChainWrap";
+
 import { fetchProviders } from "../../../common/Actions";
 import { List, Typography } from "antd";
 import { IProvider } from "../../../common/Interfaces";
 
-function ProviderList(props: any): Array<JSX.Element> | any {
+export default function ProviderList(props: any): Array<JSX.Element> | any {
   const { state, dispatch } = React.useContext(Store);
   const { web3State, sChainState } = props;
   const [inited, setInited] = useState(false);
@@ -59,6 +58,3 @@ function ProviderList(props: any): Array<JSX.Element> | any {
     </React.Fragment>
   );
 }
-
-export default withWeb3Contract(withSChain(ProviderList));
-
