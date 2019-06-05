@@ -3,10 +3,11 @@ import { addSkill } from '../../../common/Actions';
 import { Card, Input, Button } from 'antd';
 import useLoom from '../../chainstate/useLoom';
 import { Store } from '../../../common/Store';
+import useLoomWithConfig from '../../chainstate/useLoomWithConfig';
 
 
 export default function AddSkill() {
-  const loomObj = useLoom();
+  const loomObj = useLoomWithConfig();
   const {dispatch} = React.useContext(Store);
   const [name, setName] = React.useState("");
 

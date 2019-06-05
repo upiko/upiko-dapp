@@ -2,10 +2,9 @@ import React from 'react';
 import { Card } from 'antd';
 import { Store } from '../../../common/Store';
 import useReactWeb3 from '../../chainstate/useReactWeb3';
-import useLoom from '../../chainstate/useLoom';
-import useLoomToLoad from '../../chainstate/useLoomToLoad';
 import { fetchUser } from '../../../common/Actions';
 import { IUser } from '../../../common/Interfaces';
+import useLoomWithConfig from '../../chainstate/useLoomWithConfig';
 
 
 export default function ShowUserAccount(props:any) {
@@ -13,7 +12,7 @@ export default function ShowUserAccount(props:any) {
   const [user, setUser] = React.useState<IUser|any>(null);  
 
   const ethAccount = useReactWeb3();
-  const loomObj = useLoom();
+  const loomObj = useLoomWithConfig();
   
   React.useEffect(() => {
     const fetchAndSetUser = async() => {

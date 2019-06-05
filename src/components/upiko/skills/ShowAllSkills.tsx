@@ -4,13 +4,14 @@ import { fetchSkills } from '../../../common/Actions';
 import useLoom from '../../chainstate/useLoom';
 import useLoomToLoad from '../../chainstate/useLoomToLoad';
 import { Store } from '../../../common/Store';
+import useLoomWithConfig from '../../chainstate/useLoomWithConfig';
 
 
 
 
 export default function ShowAllSkills(props:any) {
   const { dispatch } = React.useContext(Store);
-  const loomObj = useLoom();
+  const loomObj = useLoomWithConfig();
   const skills = useLoomToLoad(loomObj, async() => {
     return await fetchSkills(loomObj, dispatch);
   });

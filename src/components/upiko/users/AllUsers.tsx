@@ -3,14 +3,15 @@ import { Card, List, Avatar } from 'antd';
 import { Store } from '../../../common/Store';
 import { fetchUsers } from '../../../common/Actions';
 import { IUser } from '../../../common/Interfaces';
-import useLoom from '../../chainstate/useLoom';
+
 import useLoomToLoad from '../../chainstate/useLoomToLoad';
+import useLoomWithConfig from '../../chainstate/useLoomWithConfig';
 
 
 
 export default function AllUsers(props:any) {
  const { dispatch } = React.useContext(Store);
- const loomObj = useLoom();
+ const loomObj = useLoomWithConfig();
  const users = useLoomToLoad(loomObj, async() => {
   return await fetchUsers(loomObj, dispatch);
  });
@@ -46,14 +47,3 @@ export default function AllUsers(props:any) {
   </div>
   )
 }
-
-
-/*
-
-<div style={{ background: '#ECECEC', padding: '30px' }}>
-    <Card title="All Users" bordered={false} >
-      
-    </Card>
-  </div>
-
-*/

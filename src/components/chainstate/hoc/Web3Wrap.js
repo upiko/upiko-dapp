@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Web3 from "web3";
-import { WEB3_ACCOUNT_CHECK_INTERVAL } from "../../../config";
 
 const Web3Context = React.createContext({});
 
@@ -19,7 +18,7 @@ class Web3Wrap extends Component {
       );
     }
 
-    let interval = WEB3_ACCOUNT_CHECK_INTERVAL;
+    let interval = 1000;//WEB3_ACCOUNT_CHECK_INTERVAL;
     //console.log("config account check interval is:", interval);
     let intervalId = setInterval(this.checkWeb3Account, interval);
     this.setState({ intervalId });
