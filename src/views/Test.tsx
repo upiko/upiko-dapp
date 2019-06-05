@@ -3,6 +3,7 @@ import Web3Provider from 'web3-react';
 import ShowUserAccount from '../components/upiko/users/ShowUserAccount';
 import useWeb3Config from '../components/chainstate/useWeb3Config';
 import AddUserToSideChain from '../components/upiko/users/AddUserToSideChain';
+import AllUsers from '../components/upiko/users/AllUsers';
 
 
 
@@ -19,6 +20,7 @@ export default function Test() {
             <Web3Provider connectors={web3Config.connectors} libraryName={web3Config.libraryName} web3Api={web3Config.web3Api}> 
               <AddUserToSideChain />
               <ShowUserAccount />
+              <AllUsers />
             </Web3Provider>
           </div>
         </div>

@@ -55,44 +55,47 @@ export const fetchSkills = async (
 
 
 export const fetchUsers = async (
-  sChainState: ISideChainState,
+  loomObj:ILoomObject|any,
   dispatch: any
 ) => {
   //console.log("Action.fetchUsers()");
-  let instance = await contractInstanceFromState(sChainState);
-  let userCount = await instance.methods.numberOfUsers().call();
+ 
+  let userCount = await loomObj.instance.methods.numberOfUsers().call();
   let users = [];
   for (let i = 0; i < userCount; i++) {
-    let nextUser = await instance.methods.users(i).call();
+    let nextUser = await loomObj.instance.methods.users(i).call();
     users.push(nextUser);
   }
-  return dispatch({
+  dispatch({
     type: ActionType.ALL_USERS,
     payload: users
   });
+
+  return users;
 };
 
 
 export const fetchUser = async (
   ethAddr: string,
-  sChainState: ISideChainState,
+  loomObj:ILoomObject|any,
   dispatch: any
-) => {
-  //console.log("Action.fetchUser(), for addr:", ethAddr);
-  const { sChainClient } = sChainState;
+):Promise<IUser|any> => {
+  console.log("Action.fetchUser(), for addr:", ethAddr);
+
   let inflatedUser = {};
-  let instance = await contractInstanceFromState(sChainState);
-  let id = await instance.methods.idForEthAddr(ethAddr).call();
-  let user = await instance.methods.users(id).call();
+  let id = await loomObj.instance.methods.idForEthAddr(ethAddr).call();
+  let user = await loomObj.instance.methods.users(id).call();
 
   if (user.ethAddr === ethAddr) {
     inflatedUser = user;
   }
 
-  return dispatch({
+  dispatch({
     type: ActionType.SET_USER,
     payload: inflatedUser
   });
+
+  return inflatedUser;
 };
 
 

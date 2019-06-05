@@ -3,35 +3,28 @@ import { Card, List, Avatar } from 'antd';
 import { Store } from '../../../common/Store';
 import { fetchUsers } from '../../../common/Actions';
 import { IUser } from '../../../common/Interfaces';
+import useLoom from '../../chainstate/useLoom';
+import useLoomToLoad from '../../chainstate/useLoomToLoad';
 
 
 
 export default function AllUsers(props:any) {
-  const { state, dispatch } = React.useContext(Store);
-  const { web3State, sChainState } = state;
+ const { dispatch } = React.useContext(Store);
+ const loomObj = useLoom();
+ const users = useLoomToLoad(loomObj, async() => {
+  return await fetchUsers(loomObj, dispatch);
+ });
 
-
-  React.useEffect(() => {
-    const load = async() => {
-      //await retrieveChainState(web3State, sChainState, dispatch);
-      await fetchUsers(sChainState, dispatch);
-    }
-    load();
-  }, []);
-
-
-  const userStateToArray = (usersState: any): Array<IUser> => {
+  const userResultToArray = (result:any): Array<IUser> => {
     let usersArray: Array<IUser> = [];
-
-    for (let i in users){
-      usersArray.push(usersState[i]);
+    for (let i in result){
+      usersArray.push(result[i]);
     }
     return usersArray;
   }
 
-
-  const { users } = state.usersState;
-  let usersArray  = userStateToArray(users);
+  console.log(users);
+  let usersArray = userResultToArray(users);
 
   return (
     <div style={{ background: '#ECECEC', padding: '30px' }}>
@@ -54,3 +47,14 @@ export default function AllUsers(props:any) {
   </div>
   )
 }
+
+
+/*
+
+<div style={{ background: '#ECECEC', padding: '30px' }}>
+    <Card title="All Users" bordered={false} >
+      
+    </Card>
+  </div>
+
+*/
