@@ -23,9 +23,11 @@ export default function AddSkill() {
       });
     }else{
       console.error("loom Obj is not available");
-    }
-    
+    }    
   }
+
+  console.log("loomObj:", loomObj);
+
 
   return (
     <div style={{ background: '#ECECEC', padding: '30px' }}>
