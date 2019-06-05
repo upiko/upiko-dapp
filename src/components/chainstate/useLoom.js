@@ -49,8 +49,8 @@ export default function useLoom(contractJson, connectionInfo){
     Loom.connectionInfo = connectionInfo;
 
     //console.log("useLoom.useEffect([])");
-    console.log("useLoom with contract:", Loom.contract);
-    console.log("useLoom with connectionInfo:", Loom.connectionInfo);
+   // console.log("useLoom with contract:", Loom.contract);
+   // console.log("useLoom with connectionInfo:", Loom.connectionInfo);
 
     const initialize = async() => {
       //console.log("useLoom.useEffect([]).initialize()");

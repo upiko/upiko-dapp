@@ -80,7 +80,7 @@ export const fetchUser = async (
   loomObj:ILoomObject|any,
   dispatch: any
 ):Promise<IUser|any> => {
-  console.log("Action.fetchUser(), for addr:", ethAddr);
+ // console.log("Action.fetchUser(), for addr:", ethAddr);
 
   let inflatedUser = {};
   let id = await loomObj.instance.methods.idForEthAddr(ethAddr).call();

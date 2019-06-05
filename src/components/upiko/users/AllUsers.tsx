@@ -23,7 +23,6 @@ export default function AllUsers(props:any) {
     return usersArray;
   }
 
-  console.log(users);
   let usersArray = userResultToArray(users);
 
   return (
