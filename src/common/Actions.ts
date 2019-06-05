@@ -151,18 +151,21 @@ export const addUser = async (
   loomObj: ILoomObject|any,
   dispatch: any
 ) => {
-  console.log("Action.addUser()");
- 
-  loomObj.
-  instance.methods
-    .addUser(user.name, user.ethAddr, user.isProvider)
-    .send({ from: 'LoomObj.currentUserAddress' });
+  //console.log("Action.addUser():name,address,isprovider", user.name, user.ethAddr, user.isProvider);
+  try{
+   const tx = await loomObj.instance.methods
+        .addUser(user.name, user.ethAddr, user.isProvider)
+        .send({ from: loomObj.currentUserAddress });
 
-  console.log("sChain tx submitted - addUser");
-  return dispatch({
-    type: ActionType.SET_USER,
-    payload: user
-  });
+    doNotifyTx("addUser", tx);
+
+    return dispatch({
+      type: ActionType.SET_USER,
+      payload: user
+    });
+  }catch(error){
+    doNotifyError(error);
+  }
 };
 
 export const addSkill = async (
@@ -177,13 +180,21 @@ export const addSkill = async (
       .addSkill(skillName)
       .send({ from: loomObj.currentUserAddress });
 
-    console.log("sChain tx submitted - addSkill:", tx);
-    notify("tx submitted, hash:" + tx.transactionHash);
+    doNotifyTx("addSkill", tx);
   }catch (error){
-    console.error("Error occured submitting transaciton to sideChain:", error);
-    notifyError("Error occured during transaction:" + error);
+   doNotifyError(error);
   }
 };
 
+
+const doNotifyError = (error: any) => {
+  console.error("Error occured submitting transaciton to sideChain:", error);
+  notifyError("Error occured during transaction:" + error);
+}
+
+const doNotifyTx = (txName: string, txObj: any) => {
+  console.log("sChain tx submitted - " + txName + ":", txObj);
+  notify("tx submitted, hash:" + txObj.transactionHash);
+}
 
 
