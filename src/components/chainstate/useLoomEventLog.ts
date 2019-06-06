@@ -12,31 +12,28 @@ export default function useLoomEventLog(loomObj:ILoomObject|any, eventType:Event
   
   React.useEffect(() => {
     if (loomObj){
+      console.log("Adding loom event listener for:", eventType);
       if (eventType===EventType.Skill){
-        console.log("adding skilladded event listener");
         loomObj.instance.events.SkillAdded((err:any, evt:any) => {
-          if (err){
-            console.error("error while listening to skill events:", err);
-          }else{
-            console.log("got skill event!:", evt);
-            notify("Skill event (added): " + evt.returnValues[0], false);
-          }
+          handleEvent("Skill", err, evt);
         }) 
       }else if (eventType===EventType.User){
-        console.log("adding useradded event listener");
         loomObj.instance.events.UserAdded((err:any, evt:any) => {
-          if (err){
-            console.error("error while listening to user events:", err);
-          }else{
-            console.log("got user event!:", evt);
-            notify("User event (added): " + evt.returnValues[0], false);
-          }
+          handleEvent("User", err, evt);
         }) 
-
       }else {
         console.error("Invalid EventType in userLoomEventLog Hook");
       }
     }
   }, [loomObj]);
 
+
+  const handleEvent = (name:string, err:any, evt:any) => {
+    if (err){
+      console.error(`error while listening to ${name} events:`, err);
+    }else{
+      console.log(`got ${name} event!:`, evt);
+      notify(`${name} event (added): ` + evt.returnValues[0], false);
+    }
+  }
 }
