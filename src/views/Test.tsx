@@ -4,6 +4,32 @@ import useWeb3Config from '../components/chainstate/useWeb3Config';
 import EventTest from '../components/test/EventTest';
 
 
+/*
+ this.contract.addEventListener((v) => {
+      this.setState({ skillsCount: v._value })
+    })
+  }
+
+
+  
+    this.upikoAppInstance.events.SkillAdded((err, event) => {
+      if (err) console.error('Error on event', err)
+      else {
+        if (this.onEvent) {
+          this.onEvent(event.returnValues)
+        }
+      }
+    });
+
+
+
+  addEventListener(fn) {
+    this.onEvent = fn
+  }
+
+
+*/
+
 
 export default function Test() {
   const web3Config = useWeb3Config();
