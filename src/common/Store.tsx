@@ -2,7 +2,6 @@ import React from "react";
 import {
   IAction,
   IAppState,
-  ISideChainState
 } from "./Interfaces";
 
 
@@ -14,7 +13,6 @@ export enum ActionType {
   SKILLS_LIST = "upiko/SKILLS_LIST",
   SET_ACCOUNT = "upiko/SET_ACCOUNT"
 }
-
 
 
 const initialState: IAppState = {

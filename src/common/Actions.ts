@@ -11,7 +11,6 @@ import { toast } from "react-toastify";
 import { ActionType } from "./Store";
 
 
-
 export const notify = (msg: string, success?: boolean) => {
   !success ? toast(msg) : toast.success(msg, { autoClose: false });
 };
@@ -19,18 +18,6 @@ export const notify = (msg: string, success?: boolean) => {
 export const notifyError = (msg: string) => {
   toast.error(msg, { autoClose: false });
 };
-
-
-export const setAccount = (
-  value: string,
-  dispatch: any
-) => {
-  console.log("Action.setAccount()");
-  dispatch({
-    type: ActionType.SET_ACCOUNT,
-    payload: value
-  })
-}
 
 
 export const fetchSkills = async (

@@ -17,8 +17,6 @@ import Providers from './views/Providers';
 import Skills from "./views/Skills";
 
 
-
-
 const RouterPage = (props: { pageComponent: JSX.Element } & RouteComponentProps) => props.pageComponent;
 
 ReactDOM.render(

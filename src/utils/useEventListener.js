@@ -1,11 +1,12 @@
+import { useRef, useEffect } from "react";
+
 /*
   From here: https://usehooks.com/useEventListener/
 */
-
-export default function useEventListener(eventName, handler, element = global){
+export default function useEventListener(eventName, handler, element = global) {
   // Create a ref that stores handler
   const savedHandler = useRef();
-  
+
   // Update ref.current value if handler changes.
   // This allows our effect below to always get latest handler ...
   // ... without us needing to pass it in effect deps array ...
@@ -19,13 +20,13 @@ export default function useEventListener(eventName, handler, element = global){
       // Make sure element supports addEventListener
       const isSupported = element && element.addEventListener;
       if (!isSupported) return;
-      
+
       // Create event listener that calls handler function stored in ref
       const eventListener = event => savedHandler.current(event);
-      
+
       // Add event listener
       element.addEventListener(eventName, eventListener);
-      
+
       // Remove event listener on cleanup
       return () => {
         element.removeEventListener(eventName, eventListener);
@@ -33,4 +34,4 @@ export default function useEventListener(eventName, handler, element = global){
     },
     [eventName, element] // Re-run if eventName or element changes
   );
-};
+}
