@@ -1,9 +1,4 @@
-import {
-  IProvider,
-  IUser,
-  ILoomObject,
-  Dispatch
-} from "./Interfaces";
+import { IProvider, IUser, ILoomObject, Dispatch } from "./Interfaces";
 import _ from "lodash";
 import { toast } from "react-toastify";
 import { ActionType } from "./Store";
@@ -14,6 +9,35 @@ export const notify = (msg: string, success?: boolean) => {
 
 export const notifyError = (msg: string) => {
   toast.error(msg, { autoClose: false });
+};
+
+/*class Example extends Component {
+  toastId = null;
+  customToastId = 'xxx-yyy';
+
+  notify = () => {
+    if (! toast.isActive(this.toastId)) {
+      this.toastId = toast("I cannot be duplicated !");
+    }
+
+    toast("xxx-yyy cannot be duplicated", {
+      toastId: customToastId
+    });
+  
+
+  render(){
+    return (
+      <div>
+        <button onClick={this.notify}>Notify</button>
+      </div>
+    );
+  }
+}*/
+
+export const notifyWarn = (msg: string) => {
+  if (!toast.isActive("nfId")) {
+    toast.warn(msg, { toastId: "nfId" });
+  }
 };
 
 export const fetchSkills = async (
@@ -82,7 +106,6 @@ export const fetchProviders = async (
   loomObj: ILoomObject | any,
   dispatch: Dispatch
 ) => {
- 
   let providers: Array<IProvider> = [];
   /* const { sChainClient } = sChainState;
   let instance = await contractInstanceFromState(sChainState);
@@ -163,7 +186,7 @@ export const addSkill = async (
 };
 
 const doNotifyError = (error: any) => {
-  console.error("Error occured submitting transaciton to sideChain:", error);
+  console.error("Error occured submitting transaction to sideChain:", error);
   notifyError("Error occured during transaction:" + error);
 };
 

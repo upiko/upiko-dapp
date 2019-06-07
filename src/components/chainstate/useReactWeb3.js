@@ -1,5 +1,6 @@
 import React from "react";
 import { useWeb3Context } from "web3-react";
+import { notifyWarn } from "../../common/Actions";
 
 export default function useReactWeb3() {
   const web3Context = useWeb3Context();
@@ -12,7 +13,8 @@ export default function useReactWeb3() {
   React.useEffect(() => {
     //console.log("ShowUserAccount.useEffect([context.account])");
     if (!web3Context.active && !web3Context.error) {
-      //console.log("context is !active, !error, assuming loading");
+      console.log("context is !active, !error, assuming loading");
+      notifyWarn("You currently are not signed in to Metamask, please sign in");
     } else if (web3Context.error) {
       console.error("context is in error", web3Context.error);
     } else {
