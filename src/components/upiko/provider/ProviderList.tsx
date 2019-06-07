@@ -7,7 +7,6 @@ import { IProvider } from "../../../common/Interfaces";
 
 export default function ProviderList(props: any): Array<JSX.Element> | any {
   const { state, dispatch } = React.useContext(Store);
-  const { web3State, sChainState } = props;
   const [inited, setInited] = useState(false);
 
   /* React.useEffect(() => {
@@ -16,7 +15,7 @@ export default function ProviderList(props: any): Array<JSX.Element> | any {
   }, [inited])*/
 
   const loadProviders = async () => {
-    fetchProviders(web3State, sChainState, dispatch);
+    //fetchProviders(web3State, sChainState, dispatch);
     setInited(true);
   };
 
@@ -32,11 +31,7 @@ export default function ProviderList(props: any): Array<JSX.Element> | any {
   };
 
 
-  if (!inited && sChainState.sChainClient) {
-    loadProviders();
-  }
-
-
+  
   console.log("props", props);
   const { providers } = state.providerState;
   console.log("providers", providers);

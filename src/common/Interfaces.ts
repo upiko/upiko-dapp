@@ -6,6 +6,11 @@
 */
 export type Dispatch = React.Dispatch<IAction>;
 
+export interface IAction {
+  type: string; //Store.ActionType enum
+  payload: any;
+}
+
 
 export interface ILoomConnectionInfo {
   networkAlias: string;  // LOCAL_DEV | TEST | EXTDEV | PROD
@@ -29,31 +34,11 @@ export interface ILoomObject {
 
 
 export interface IAppState {
-  web3State: IWeb3State;
-  sChainState: ISideChainState;
   providerState: IProviderState;
   userState: IUser;
   usersState: IUsers;
   skillsList: ISkillsList;
-}
-
-export interface IChainState{
-  web3State: IWeb3State;
-  sChainState: ISideChainState;
-}
-
-
-export interface IWeb3State {
-  web3Context: any;
-  web3: any;
-  accounts: any;
-  contract: any;
-  account: string;
-}
-
-export interface ISideChainState {
-  sChainClient: any;
-  sChainContract: any;
+  ethAddr: string;
 }
 
 
@@ -83,9 +68,5 @@ export interface IProviderState {
   providers: Array<any>;
 }
 
-export interface IAction {
-  type: string;
-  payload: IAppState;
-}
 
 

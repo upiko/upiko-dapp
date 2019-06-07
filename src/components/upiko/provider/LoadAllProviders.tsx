@@ -6,7 +6,6 @@ import { fetchProviders } from "../../../common/Actions";
 
 export default function LoadAllProviders() {
   const { state, dispatch } = React.useContext(Store);
-  const { web3State, sChainState } = state;
   const [ inited, setInited] = React.useState(false);
   const { providers } = state.providerState;
 
@@ -18,7 +17,7 @@ export default function LoadAllProviders() {
   const loadProviders = async() => {
     //await loadChainState(dispatch);
     console.log("loadProviders()");
-    fetchProviders(web3State, sChainState, dispatch);
+    //fetchProviders(web3State, sChainState, dispatch);
   }
 
 

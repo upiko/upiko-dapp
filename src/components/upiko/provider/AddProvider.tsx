@@ -1,14 +1,10 @@
 import React, { useState } from "react";
 import { Input, Button } from "antd";
-import { addProvider } from "../../../common/Actions";
-import { Store } from "../../../common/Store";
 import { IProvider } from "../../../common/Interfaces";
 
 
 
 export default function AddProvider(props: any) {
-  const { state, dispatch } = React.useContext(Store);
-  const { web3State, sChainState } = props;
   const [providerName, setProviderName] = useState("");
   return (
     <div>
@@ -24,7 +20,7 @@ export default function AddProvider(props: any) {
         onClick={() => {
           console.log("MyDisplay.addProvider.click(), value:", providerName);
           const newProvider: IProvider = { name: providerName };
-          addProvider(newProvider, web3State, sChainState, dispatch);
+          //addProvider(newProvider, web3State, sChainState, dispatch);
           setProviderName("");
         }}
       >

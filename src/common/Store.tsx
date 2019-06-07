@@ -16,17 +16,6 @@ export enum ActionType {
 
 
 const initialState: IAppState = {
-  web3State: {
-    web3Context: {},
-    web3: {},
-    accounts: [],
-    contract: {},
-    account: ''
-  },
-  sChainState: {
-    sChainClient: {},
-    sChainContract: {}
-  },
   providerState: {
     providers: []
   },
@@ -40,7 +29,8 @@ const initialState: IAppState = {
   },
   skillsList: {
     skills: []
-  }
+  },
+    ethAddr: ""
 };
 
 
@@ -52,11 +42,7 @@ function reducer(state: IAppState, action: IAction | any): IAppState {
   switch (action.type) {
     case ActionType.SET_ACCOUNT:
       return {
-        ...state,
-        web3State:{
-          ...state.web3State, 
-          account: action.payload
-        }
+        ...state, ethAddr: action.payload
       }
     case ActionType.FETCH_PROVIDERS_DATA:
       return { ...state, providerState: { providers: action.payload } };
