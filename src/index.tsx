@@ -9,7 +9,6 @@ import './fixed.css';
 import './style.css';
 
 import Main from "./views/Main";
-import Register from "./views/Register";
 import Test from './views/Test';
 import SoSes from './views/SoSes';
 import Users from './views/Users';
@@ -24,7 +23,6 @@ ReactDOM.render(
       <Router>
         <App path="/">        
             <RouterPage pageComponent={<Main />} path="/" />
-            <RouterPage pageComponent={<Register />} path="/register" />
             <RouterPage pageComponent={<Test />} path="/test" />
             <RouterPage pageComponent={<SoSes />} path="/soses" />
             <RouterPage pageComponent={<Users />} path="/users" />

@@ -1,7 +1,7 @@
 import React from "react";
 import { CryptoUtils, Client, LoomProvider, LocalAddress } from "loom-js";
 import Web3 from "web3";
-import UpikoContractJson from "./../../contracts/UpikoApp.json";
+import UpikoContractJson from "../../contracts/UpikoApp.json";
 
 /* based on loom truffle example, contract.js file, adapted to react hooks
    https://github.com/loomnetwork/truffle-dappchain-example/blob/master/src/contract.js

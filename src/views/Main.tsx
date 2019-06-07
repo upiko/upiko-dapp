@@ -1,27 +1,6 @@
 import React from "react";
-import { Store } from "./../common/Store";
 import Header from "./Header";
-import Footer from "./Footer";
-import { Link } from "@reach/router";
 
-
-/*const ProviderList = React.lazy<any>(() =>
-  import("../components/upiko/ProviderList")
-);*/
-
-/* header 
- <header className="header">
-            <div>
-                <h4>upiko</h4>
-            </div>
-            <div>
-                <Link to="/">Home</Link>
-                <Link to="/register">Register</Link>
-                <Link to="/createsos">CreateSos</Link>
-                <Link to="/test">--=-*!--*-</Link>
-            </div>
-        </header>
-*/
 
 export default function Main() {
   
