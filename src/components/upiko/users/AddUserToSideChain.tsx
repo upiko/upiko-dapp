@@ -18,6 +18,7 @@ export default function AddUserToSideChain(props: any) {
       <Card title="Add User" bordered={false} >
         <p className="strong-p">Enter details for new user</p>
         <Input
+          id="add-user-input"
           className="form-control"
           placeholder="User name"
           value={name}

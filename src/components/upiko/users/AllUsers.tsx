@@ -6,6 +6,7 @@ import { IUser } from '../../../common/Interfaces';
 
 import useLoomToLoad from '../../chainstate/useLoomToLoad';
 import useLoomWithConfig from '../../chainstate/useLoomWithConfig';
+import { resultToArray } from '../../../utils/StateUtil';
 
 
 
@@ -16,15 +17,7 @@ export default function AllUsers(props:any) {
   return await fetchUsers(loomObj, dispatch);
  });
 
-  const userResultToArray = (result:any): Array<IUser> => {
-    let usersArray: Array<IUser> = [];
-    for (let i in result){
-      usersArray.push(result[i]);
-    }
-    return usersArray;
-  }
-
-  let usersArray = userResultToArray(users);
+  let usersArray = resultToArray<IUser>(users);
 
   return (
     <div style={{ background: '#ECECEC', padding: '30px' }}>

@@ -17,6 +17,7 @@ export default function AddSkill() {
     <Card title="Add Skill" bordered={false} >
     <p className="strong-p">Enter name of new skill</p>
         <Input
+          id="add-skill-input"
           className="form-control"
           placeholder="Skill name"
           value={name}
