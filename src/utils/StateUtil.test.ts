@@ -21,7 +21,6 @@ const testInput = [
   }
 ];
 
-
 test("empty array result", () => {
   const testInput = Array<any>();
   const expectedArray = new Array<IUser>();
