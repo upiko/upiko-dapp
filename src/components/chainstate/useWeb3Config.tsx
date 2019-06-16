@@ -12,7 +12,7 @@ export interface Web3Config{
 
 export default function useWeb3Config() {
   const { InjectedConnector } = Connectors;
-  const MetaMask = new InjectedConnector({ supportedNetworks: [1, 3, 4] });
+  const MetaMask = new InjectedConnector({ supportedNetworks: [1, 3, 4, 5777] });
   const connectors = { MetaMask };
 
   let config:Web3Config = {

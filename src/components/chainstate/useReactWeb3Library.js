@@ -1,9 +1,9 @@
 import React from "react";
 import { useWeb3Context } from "web3-react";
 
-export default function useReactWeb3() {
+export default function useReactWeb3Library() {
   const web3Context = useWeb3Context();
-  const [web3Acct, setWeb3Acct] = React.useState("");
+  const [library, setLibrary] = React.useState(null);
 
   React.useEffect(() => {
     web3Context.setFirstValidConnector(["MetaMask"]);
@@ -16,12 +16,12 @@ export default function useReactWeb3() {
     } else if (web3Context.error) {
       console.error("context is in error", web3Context.error);
     } else {
-      let temp = web3Context.account;
+      let temp = web3Context.library;
       if (temp) {
-        setWeb3Acct(temp);
+        setLibrary(temp);
       }
     }
-  }, [web3Context.account]);
+  }, [web3Context.library]);
 
-  return web3Acct;
+  return library;
 }

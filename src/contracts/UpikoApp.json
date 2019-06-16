@@ -5710,18 +5710,60 @@
         }
       },
       "links": {},
-      "address": "0x2EFc8879bBF0B9021531E56BC2c6cA27Ba857adF",
-      "transactionHash": "0xf449f77aceedcdd945ce142444f72147c60a7c16873b11bedc388ee86b7440cb"
+      "address": "0x67cb9C9633ee541e971d0677E03d1c60c2ff8CDF",
+      "transactionHash": "0x6d8182dc2ec238eb7be1338ada8cde836493e35a8d54e96e556b293a22f687cd"
     },
     "9545242630824": {
-      "events": {},
+      "events": {
+        "0xfddfbf8588cfefa7a4b16f16617617b7a1f939c33c14602e6c24d6a36a27149e": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_name",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "name": "_ethAddr",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "_isProvider",
+              "type": "bool"
+            },
+            {
+              "indexed": false,
+              "name": "sChainAddr",
+              "type": "address"
+            }
+          ],
+          "name": "UserAdded",
+          "type": "event",
+          "signature": "0xfddfbf8588cfefa7a4b16f16617617b7a1f939c33c14602e6c24d6a36a27149e"
+        },
+        "0xcb8a9b44b245cdca72405c0a2628ed21545891648966a64f502761bc3e49eaf9": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_skillName",
+              "type": "string"
+            }
+          ],
+          "name": "SkillAdded",
+          "type": "event",
+          "signature": "0xcb8a9b44b245cdca72405c0a2628ed21545891648966a64f502761bc3e49eaf9"
+        }
+      },
       "links": {},
-      "address": "0x67cb9C9633ee541e971d0677E03d1c60c2ff8CDF",
-      "transactionHash": "0x990b84bfca688ba74128cddcacec939489f8252db08a6079bc523fd7257937a1"
+      "address": "0x85fE064e89F9860514B52B407C0fc829860a7735",
+      "transactionHash": "0x271b4ee778b4fe5ed8831f675a69a9f8e16bc2811c53300426602e0fc113f8ea"
     }
   },
   "schemaVersion": "3.0.1",
-  "updatedAt": "2019-06-05T17:20:47.559Z",
+  "updatedAt": "2019-06-10T14:19:28.816Z",
   "devdoc": {
     "methods": {}
   },

@@ -11,8 +11,8 @@ export default function ShowUserAccount(props:any) {
   const { dispatch } = React.useContext(Store);
   const [user, setUser] = React.useState<IUser|any>(null);  
 
-  const ethAccount = useReactWeb3();
   const loomObj = useLoomWithConfig();
+  const ethAccount = useReactWeb3();
   
   React.useEffect(() => {
     const fetchAndSetUser = async() => {
