@@ -3,7 +3,9 @@ import useReactWeb3 from "../chainstate/useReactWeb3";
 import useReactWeb3Library from "../chainstate/useReactWeb3Library";
 import tokenContract from "./../../contracts/PikoToken.json";
 import saleContract from "./../../contracts/PikoTokenSale.json";
-import Web3 from "web3";
+import useEthContract from "../chainstate/useEthContract";
+import { toEth } from "../../utils/EthUtil";
+
 
 
 export default function TokenSaleTest() {
@@ -64,7 +66,7 @@ export default function TokenSaleTest() {
         <div id="content" className="text-center">
           <p>
             Introducing " PIKO Token" Token price is <span>{salePrice}</span> Ether. You
-            currently have <span>{pikos > 1000000 ? `pikos` : `pikos`}</span> PIKO.
+            currently have <span>{pikos > 1000000 ? `${pikos/1000000}M` : `${pikos}`}</span> PIKO.
           </p>
           <br />
           <p>Your ethereum address is: {ethAddr}</p>
@@ -72,43 +74,5 @@ export default function TokenSaleTest() {
       </div>
     </div>
   );
-}
-
-
-/*function toEth(wei:any):any {
-  return Web3. utils.fromWei('1000000000000000000', 'ether');
-}*/
-
-function toEth(web3:any, weiVal:any):any {
-  return web3.utils.fromWei(weiVal, 'ether');
-}
-
-function useEthContract(web3: any, contractJson: any): any {
-  const [instance, setInstance] = React.useState(null);
-  //console.log("UseEthContract, web3:", web3);
-  //console.log("UseEthContract, contractJson:", contractJson);
-
-
-  React.useEffect(() => {
-    const initWithContract = async() => {
-      const networkId = await web3.eth.net.getId();
-      const deployedNetwork = contractJson.networks[networkId];
-      //console.log(deployedNetwork.address);
-      const instance = new web3.eth.Contract(
-        contractJson.abi,
-        deployedNetwork && deployedNetwork.address
-      );
-      if (instance){
-        setInstance(instance);
-      }else{
-        console.error("expected a contract instance, but it was unexpectedly not set");
-      }
-    }
-    if (web3){
-      initWithContract();
-    }
-  }, [web3])
-
-  return instance;
 }
 
