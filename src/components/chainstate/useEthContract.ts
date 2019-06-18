@@ -26,6 +26,8 @@ export default function useEthContract(web3: any, contractJson: any): any {
     }
   }, [web3])
 
+ 
+
   return instance;
 }
 
