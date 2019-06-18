@@ -6,7 +6,7 @@ import { notify } from '../../common/Actions';
 export enum EventType{
   Skill = "Skill",
   User = "User"
-}
+};
 
 export default function useLoomEventLog(loomObj:ILoomObject|any, eventType:EventType){
   
@@ -22,7 +22,7 @@ export default function useLoomEventLog(loomObj:ILoomObject|any, eventType:Event
           handleEvent("User", err, evt);
         }) 
       }else {
-        console.error("Invalid EventType in userLoomEventLog Hook");
+        console.error("Invalid EventType in useLoomEventLog Hook");
       }
     }
   }, [loomObj]);

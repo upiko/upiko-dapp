@@ -6,6 +6,8 @@ import saleContract from "./../../contracts/PikoTokenSale.json";
 import useEthContract from "../chainstate/useEthContract";
 import { toEth, toWei } from "../../utils/EthUtil";
 import { Input, Button, Card, Progress } from "antd";
+import useEthEventLog from "../chainstate/useEthEventLog";
+import { EventType } from "../chainstate/useEthEventLog";
 
 
 
@@ -53,13 +55,16 @@ export default function TokenSaleTest() {
       if (tempSold){
         setTokensSold(tempSold);
       }
-
       console.log("tokenSaleAddress:", tokenSaleInstance.address);
     }
     if (tokenSaleInstance && lib){
       loadDetails();
     }
   }, [tokenSaleInstance, lib]);
+
+
+
+  useEthEventLog(tokenSaleInstance, EventType.TokenPurchase);
 
 
 
