@@ -11,6 +11,8 @@ const ethContractSource = './../upiko-eth/build/contracts/';
 const ethContractDestination = './src/contracts/';
 const sideChainContractName = 'UpikoApp.json';
 const sideChainContractSource = './../upiko-schain/build/contracts/';
+const tokenContractName = 'PikoToken.json';
+const tokenContractSource = './../piko-token/build/contracts/';
 const sideChainContractDestination = ethContractDestination;
 
 
@@ -27,7 +29,7 @@ function moveFile(from, to){
 
     moveFile(ethContractSource + ethContractName, ethContractDestination + ethContractName);
     moveFile(sideChainContractSource + sideChainContractName, sideChainContractDestination + sideChainContractName);
-
+    moveFile(tokenContractSource + tokenContractName, sideChainContractDestination + tokenContractName);
 
 
     console.log("...copying done");  
