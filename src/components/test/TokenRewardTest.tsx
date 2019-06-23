@@ -46,7 +46,19 @@ export default function TokenRewardTest() {
 
       <div style={{ background: "#ECECEC", padding: "10px" }}>
         <Card title="Token Redeem" bordered={true}>
-          <p>Button here</p>
+        <Button
+            type="danger"
+            onClick={async () => {
+              console.log("redeeming reward for all users");
+              //{from:'0xcdf65D26550B6fF59c89Bd6D12Cfb08F62D475c6'}
+              //const tx = await inst.methods.transfer(ethAcct, 666).send({from: '0xcdf65D26550B6fF59c89Bd6D12Cfb08F62D475c6'});
+              const tx = await rewardInst.methods
+                .payout()
+                .send({ from: ethAcct });
+            }}
+          >
+            Payout rewards (all users)
+          </Button>
         </Card>
       </div>
     </React.Fragment>
